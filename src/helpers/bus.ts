@@ -53,16 +53,6 @@ const bus = new Vue({
         eventMap.delete(event);
       }
     },
-    sleep(time: number): Promise<void> {
-      return new Promise((resolve, reject) => {
-        if (time <= 0) {
-          return reject();
-        }
-        setTimeout(() => {
-          return resolve();
-        }, time * 1000);
-      });
-    },
 
   }
 });

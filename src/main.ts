@@ -11,6 +11,7 @@ Vue.use(Bus);
 
 // 挂载toast友好提示实例
 // 通过this.$toast.success('成功')/error('错误')/loading('加载中')来调用
+// 仅支持H5平台
 import Toast from '@/helpers/toast';
 Vue.use(Toast);
 
