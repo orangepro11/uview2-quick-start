@@ -16,7 +16,6 @@
       </u--input>
 
       <u-button class="button" @click="handleLogin">登录</u-button>
-      <u-toast ref="uToast"></u-toast>
     </view>
   </view>
 </template>
