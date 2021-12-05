@@ -1,6 +1,6 @@
 <template>
   <view>
-    <image src="@/static/erp/login/login.png" class="login-logo" />
+    <image src="@/static/login/login.png" class="login-logo" />
     <view class="title">账号登录</view>
     <view class="form">
       <u--input v-model="username" class="input" placeholder="账号" shape="circle" focus clearable>
@@ -22,8 +22,6 @@
 </template>
 
 <script lang="ts">
-import { userLogin } from '@/api/erp/auth';
-import { setUserToken } from '@/helpers/erp/hooks';
 import Vue from 'vue';
 export default Vue.extend({
   name: 'LoginPage',
@@ -39,39 +37,7 @@ export default Vue.extend({
      * 登录方法
      */
     handleLogin() {
-      const $uToast = this.$refs.uToast;
-      userLogin(this.username, this.password)
-        .then((token) => {
-          // @ts-ignore
-          setUserToken(token);
-          if ($uToast) {
-            $uToast.show({
-              title: '登录成功',
-              message: '登录成功',
-              type: 'success',
-              duration: 2000,
-              complete: () => {
-                this.$u.route({
-                  url: '/pages/index/index',
-                  type: 'tab'
-                });
-              }
-            });
-          }
-        })
-        .catch(() => {
-          if ($uToast) {
-            $uToast.show({
-              title: '登录失败',
-              message: '登录失败',
-              type: 'error',
-              duration: 2000,
-              complete: () => {
 
-              }
-            });
-          }
-        });
     }
   },
   computed: {
