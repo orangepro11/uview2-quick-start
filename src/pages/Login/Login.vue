@@ -5,13 +5,13 @@
     <view class="form">
       <u--input v-model="username" class="input" placeholder="账号" shape="circle" focus clearable>
         <template v-slot:prefix>
-          <image src="@/static/erp/login/username.png" class="username-icon" />
+          <image src="@/static/login/username.png" class="username-icon" />
         </template>
       </u--input>
 
       <u--input v-model="password" class="input" placeholder="账号" shape="circle" focus clearable password>
         <template v-slot:prefix>
-          <image src="@/static/erp/login/password.png" class="username-icon" />
+          <image src="@/static/login/password.png" class="username-icon" />
         </template>
       </u--input>
 
