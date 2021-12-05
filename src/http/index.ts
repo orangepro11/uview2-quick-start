@@ -1,5 +1,6 @@
-import { getUserToken, toLoginPage } from '@/helpers/erp/hooks';
+import { getUserToken, toLoginPage } from '@/helpers/hooks';
 import fly from 'flyio';
+
 import baseURL from './baseURL';
 declare const uni: any;
 
@@ -7,14 +8,12 @@ fly.interceptors.request.use(request => {
   request['baseURL'] = baseURL;
   request.headers['Accept'] = 'application/json; text/plain; charset=utf-8';
   request.headers['Content-Type'] = 'application/json; charset=utf-8';
-  const token = getUserToken();
+  const token = getUserToken(); // 这里获取你的token
   if (token) {
     request.headers['Authorization'] = token;
   } else {
     // 让用户去登录
-    uni.reLaunch({
-      url: '/pages/login/login'
-    });
+    toLoginPage();
   }
   return request;
 });
@@ -43,9 +42,7 @@ fly.interceptors.response.use(
         content: '登录失效，请重新登录'
       });
       uni.removeStorageSync('token');
-      uni.reLaunch({
-        url: '/pages/login/login'
-      });
+      toLoginPage();
     } else {
       uni.showModal({
         title: '出错了',
@@ -57,10 +54,13 @@ fly.interceptors.response.use(
 
 export default fly;
 
+// 方便以函数的形式调用get方法
 export function get(url: string, query?: object): Promise<any> {
   return fly.get(url, query);
 }
 
+// 方便以函数的形式调用post方法
+// 第三个参数是get参数
 export function post(url: string, body: any, query?: any): Promise<any> {
   // convert query object to string and add to url
   if (query) {
