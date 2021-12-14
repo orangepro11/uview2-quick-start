@@ -374,4 +374,4 @@ export default { install };
 
 # 关于uview2版本
 
-该项目基于uview2.0.9非稳定版，后续会持续更新。
+该项目基于uview2.0.13非稳定版，后续会持续更新。
