@@ -7907,11 +7907,6 @@ multicast-dns@^6.0.1:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
 
-muni-http-for-uniapp@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/muni-http-for-uniapp/-/muni-http-for-uniapp-1.0.0.tgz#e264f2edc9400b71caa69ca54755d5748f8f90b0"
-  integrity sha512-SHbYHHMpaekJ0tgg5OEgZPrbM2rvIzPKV7oPJAPe3c0f+0KYnccvSi3Y3SFlebGBXDlE7eAmZZlapK/q8o8mHw==
-
 mustache@^3.1.0:
   version "3.2.1"
   resolved "https://registry.npm.taobao.org/mustache/download/mustache-3.2.1.tgz#89e78a9d207d78f2799b1e95764a25bf71a28322"
@@ -11433,10 +11428,10 @@ uuid@^8.3.2:
   resolved "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
-uview-ui@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.npmjs.org/uview-ui/-/uview-ui-2.0.9.tgz#ed36f8b8abbadf9b0d5f060e3bdd63f9f24a4b93"
-  integrity sha512-VyEvaLH3GUoEAOetFGCV91FU3P2FomE01De9d3RdwLXzW6lOgLjVO9LZClIrBr+xmNSzL4AL5YYgG5wILbQTjQ==
+uview-ui@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.npmmirror.com/uview-ui/download/uview-ui-2.0.13.tgz#1b12620730d97d4636217dbbb62d086025cf4a9d"
+  integrity sha512-yfz87pav9wNAegVq5oCzY0fkc7lW847eOSQPVZ7iD0k/SIJU+3NIgwjjfRo84uPihsQ9hsjg7zE7EEXsMmAQaQ==
 
 v8-to-istanbul@^4.1.3:
   version "4.1.4"
