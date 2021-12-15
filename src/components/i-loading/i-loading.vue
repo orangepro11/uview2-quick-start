@@ -1,0 +1,37 @@
+<template>
+  <view v-if="loading">
+    <view class="mask-api" :style="{ zIndex: zIndex + 990 }" />
+    <view class="load" :style="{ zIndex: zIndex + 1 }">
+      <div class="square-spin">
+        <image :src="DEF_lOGO" />
+      </div>
+      <view class="text">
+        {{ text }}
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+export default {
+  name: 'Loading',
+  data() {
+    return {
+      DEF_lOGO: '',
+      loading: false
+    };
+  },
+  methods: {
+    show() {
+      this.loading = true;
+    },
+    hide() {
+      this.loading = false;
+    }
+  }
+};
+</script>
+
+<style scoped lang="scss">
+@import 'loading.scss';
+</style>
