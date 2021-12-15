@@ -25,8 +25,7 @@ export default {
     fireworksDraw() {
       let _this = this;
       let ribbon = [];
-      let // 彩带容器
-        particleCount = this.particleCount;
+      let particleCount = this.particleCount;
       let n = null;
       let r = null;
       let a = null;
