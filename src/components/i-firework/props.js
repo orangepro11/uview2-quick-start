@@ -1,3 +1,5 @@
+import { minBrowserRefreshTime, systemInfo } from './system';
+
 export default {
 	props: {
     particleCount: {
@@ -39,25 +41,25 @@ export default {
     width: {
       type: [Number, String],
       default: () => {
-        return systenInfo.windowWidth;
+        return systemInfo.windowWidth;
       }
     },
     height: {
       type: [Number, String],
       default: () => {
-        return systenInfo.windowHeight;
+        return systemInfo.windowHeight;
       }
     },
     x: {
       type: [Number, String],
       default: () => {
-        return systenInfo.windowWidth / 2;
+        return systemInfo.windowWidth / 2;
       }
     },
     y: {
       type: [Number, String],
       default: () => {
-        return systenInfo.windowHeight * 0.4;
+        return systemInfo.windowHeight * 0.4;
       }
     }
   },

@@ -1,4 +1,12 @@
+import { minBrowserRefreshTime, systemInfo } from './system';
+
+let fireCanvasBox = null;
 export default {
+  data() {
+    return {
+      pixelRatio: systemInfo.pixelRatio,
+    };
+  },
 	methods: {
 		parseInt16(t) {
       return parseInt(t, 16);

@@ -14,17 +14,10 @@
 
 import props from './props';
 import utils from './utils';
-import { minBrowserRefreshTime, systemInfo } from './system';
-
-let fireCanvasBox = null;
 
 export default {
   mixins: [props, utils],
-  data() {
-    return {
-      pixelRatio: systemInfo.pixelRatio
-    };
-  },
+
   mounted() {},
   methods: {
     start() {

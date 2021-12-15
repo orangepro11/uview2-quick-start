@@ -1,6 +1,7 @@
 <template>
   <view>
     恭喜你成功跑起来了~
+    <i-firework ref="firework"></i-firework>
   </view>
 </template>
 
@@ -10,22 +11,15 @@ export default Vue.extend({
   name: 'IndexPage',
   components: {},
   data() {
-    return {
-     
-    };
+    return {};
   },
-  methods: {
-   
-  },
-  computed: {
-
-  },
-  mounted() {
-
+  methods: {},
+  computed: {},
+  mounted() {},
+  onReady() {
+    this.$refs.firework.start();
   }
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
