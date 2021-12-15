@@ -5,6 +5,10 @@
 </template>
 
 <script>
+/**
+ * @description 抽奖组件，待完善
+ */
+
 import props from './props';
 import utils from './utils';
 
