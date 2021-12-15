@@ -3,7 +3,8 @@
     <view class="mask-api" :style="{ zIndex: zIndex + 990 }" />
     <view class="load" :style="{ zIndex: zIndex + 1 }">
       <div class="square-spin">
-        <image :src="DEF_lOGO" />
+        <!-- <image src="@/static/loading/loading.png" /> -->
+        <image :src="logo" :style="{ backgroundColor: color }" />
       </div>
       <view class="text">
         {{ text }}
@@ -25,7 +26,7 @@ export default {
   mixins: [props],
   data() {
     return {
-      DEF_lOGO: '',
+      logo: '',
       loading: false
     };
   },
