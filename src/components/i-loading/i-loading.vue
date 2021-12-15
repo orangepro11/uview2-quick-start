@@ -13,8 +13,16 @@
 </template>
 
 <script>
+/**
+ * @description: 加载中的动画，通过this.$refs.loading.show()调用
+ * @props {String} text 加载中的文字
+ */
+
+import props from './props';
+
 export default {
   name: 'Loading',
+  mixins: [props],
   data() {
     return {
       DEF_lOGO: '',

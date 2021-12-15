@@ -5,16 +5,14 @@
 </template>
 
 <script>
+import props from './props';
+import utils from './utils';
+
 export default {
-  props: {
-    jackPot: {
-      type: Array,
-      default: () => []
-    },
-    finalResult: {
-      type: Object,
-      default: () => {}
-    }
-  }
+  mixins: [props, utils]
 };
 </script>
+
+<style lang="scss" scoped>
+@import 'flop.scss';
+</style>
