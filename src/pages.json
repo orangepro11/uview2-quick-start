@@ -1,6 +1,7 @@
 {
   "easycom": {
-    "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+    "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue",
+    "^i-(.*)": "uview-ui/components/i-$1/i-$1.vue"
   },
   "pages": [
     {
@@ -30,8 +31,6 @@
     "selectedColor": "#1A97FF",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "list": [
-    
-    ]
+    "list": []
   }
 }
