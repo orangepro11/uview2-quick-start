@@ -1,0 +1,657 @@
+//ListChange.vue
+.screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 88rpx;
+  border-top-right-radius: 12rpx;
+  border-top-left-radius: 12rpx;
+}
+
+.cut-off {
+  width: 1rpx;
+  height: 40rpx;
+  opacity: 0.4;
+  background: #d8d8d8;
+}
+
+.screen-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 234rpx;
+  height: 88rpx;
+}
+
+.screen-icon {
+  width: 20rpx;
+  height: 30rpx;
+  margin-left: 5rpx;
+}
+
+.screen-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 204rpx;
+  height: 68rpx;
+  border-radius: 34rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #ffffff;
+  text-align: center;
+}
+
+.screen-type {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  word-break: break-all;
+  z-index: 9;
+  height: 0;
+  transition: height 0.2s ease-in-out;
+  bottom: 100rpx;
+}
+
+.screen-type-box {
+  height: 544rpx;
+  transition: height 0.3s ease-in-out;
+}
+
+.screen-box-shadow {
+  box-shadow: 0 8rpx 20rpx 0 rgba(0, 0, 0, 0.1);
+}
+
+.more-item-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 172rpx;
+  height: 58rpx;
+  border-radius: 8rpx;
+  font-family: DINAlternate-Bold;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.border-FE5542 {
+  border: 2rpx solid #fe5542;
+}
+
+.border-C2C2C2 {
+  border: 2rpx solid #c2c2c2;
+}
+
+.width-172-rpx {
+  width: 172rpx;
+}
+
+//*------ApiLoading.vue
+.lunch {
+}
+
+.mask {
+  z-index: 998 !important;
+  background-color: #fff;
+  backdrop-filter: blur(0rpx);
+}
+
+.load {
+  z-index: 9999 !important;
+}
+
+.mask-api {
+  //background-color: #fff;
+  backdrop-filter: blur(10rpx);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+}
+
+.load {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  z-index: 30;
+}
+
+.text {
+  margin-top: 30rpx;
+  font-size: 34rpx;
+  color: #666;
+  //background-color: #fff;
+  //padding: 24rpx 56rpx;
+  //border-radius: 24rpx;
+}
+
+@-webkit-keyframes square-spin {
+  25% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+    transform: perspective(100px) rotateX(180deg) rotateY(0);
+  }
+  50% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+    transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+  }
+  75% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+    transform: perspective(100px) rotateX(0) rotateY(180deg);
+  }
+  100% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+    transform: perspective(100px) rotateX(0) rotateY(0);
+  }
+}
+
+@keyframes square-spin {
+  25% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+    transform: perspective(100px) rotateX(180deg) rotateY(0);
+  }
+  50% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+    transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+  }
+  75% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+    transform: perspective(100px) rotateX(0) rotateY(180deg);
+  }
+  100% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+    transform: perspective(100px) rotateX(0) rotateY(0);
+  }
+}
+
+.square-spin > image {
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  background: #fff;
+  -webkit-animation: square-spin 1.5s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
+  animation: square-spin 1.5s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
+}
+
+//PageLoading.vue
+.saas-loading {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.loading {
+  width: 246rpx;
+  height: 248rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20rpx;
+}
+
+.loading-msg {
+  font-size: 34rpx;
+  font-family: PingFangSC, PingFangSC-Regular;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 34rpx;
+  color: #ffffff;
+}
+
+.turn {
+  width: 68rpx;
+  height: 68rpx;
+  animation: turn 1s linear infinite;
+  display: block;
+  margin: auto;
+}
+
+/*
+  turn : 定义的动画名称
+  1s : 动画时间
+  linear : 动画以何种运行轨迹完成一个周期
+  infinite :规定动画应该无限次播放
+ */
+
+@keyframes turn {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(-90deg);
+  }
+  50% {
+    -webkit-transform: rotate(-180deg);
+  }
+  75% {
+    -webkit-transform: rotate(-270deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+
+//TabBar.vue
+.tab-bar-item {
+  z-index: 999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #ffffff;
+  width: 100%;
+}
+
+.item-icon {
+  display: block;
+  width: 48rpx;
+  height: 48rpx;
+  margin: auto;
+}
+
+.item-text {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #9da1a5;
+  text-align: center;
+}
+
+.color-FE5542 {
+  color: #fe5542;
+}
+
+.color-9DA1A5 {
+  color: #9da1a5;
+}
+
+//CommentStars.vue
+.grade {
+  display: inline-block;
+}
+
+.pentagram {
+  width: 25rpx;
+  height: 23rpx;
+  margin: 10rpx 8rpx 0 0;
+}
+
+//indexHander.vue
+.index_hander {
+  padding: 14rpx 20rpx;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hander_location {
+  font-size: 30rpx;
+  font-weight: 600;
+  width: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.location-icon {
+  width: 42rpx;
+  height: 45rpx;
+}
+
+.location_direction {
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.hander_input {
+  color: rgba(117, 117, 117, 1);
+  padding-left: 24rpx;
+  margin-right: 5rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  height: 78rpx;
+  background-color: #f9f9f9;
+}
+
+.hander_button {
+  width: 180rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18rpx 6rpx;
+  // height: 60rpx;
+  background-image: linear-gradient(90deg, #ff8b43 0%, #fe4f41 100%);
+  border-radius: 16rpx;
+  // border: 2rpx #FE5542 solid;
+  font-size: 32rpx;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+.button_img {
+  width: 28rpx;
+  height: 28rpx;
+  //background-color: #ffffff;
+}
+
+//indexSwiperCard.vue
+.index-card-swiper {
+  padding: 24rpx;
+  border-radius: 12rpx;
+  background-color: #ffffff;
+  height: 392rpx;
+  margin-top: 20rpx;
+}
+
+//PerfectTips.vue
+.perfect-page {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.consummate {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 572rpx;
+  height: 682rpx;
+  background: #ffffff;
+  border-radius: 17rpx;
+}
+
+.icon_wansxx {
+  width: 326rpx;
+  height: 326rpx;
+}
+
+.dotted-rectangle {
+  width: 326rpx;
+  height: 326rpx;
+  margin: 45rpx 124rpx 0rpx 124rpx;
+}
+
+.info-perfect {
+  font-weight: bold;
+  font-size: 38rpx;
+  color: #333333;
+  margin: 16rpx 0 6rpx 0;
+}
+
+.info-tips {
+  font-size: 28rpx;
+  color: #aaaaaa;
+}
+
+.to-perfect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 224rpx;
+  height: 68rpx;
+  border: 4rpx solid #fe5542;
+  border-radius: 34rpx;
+  background: #ffffff;
+  color: #fe5542;
+  font-size: 36rpx;
+  font-weight: 550;
+  letter-spacing: 2rpx;
+  margin-top: 70rpx;
+}
+
+//PopPrompt.vue
+.dh {
+  transform: scale(1);
+  transition: transform 0.3s;
+}
+
+.pop-tips {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-box {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  background: #faf9fe;
+  border-radius: 16rpx;
+  width: 572rpx;
+}
+
+.title {
+  text-align: center;
+  padding-top: 48rpx;
+  padding-bottom: 48rpx;
+  height: 44rpx;
+  font-weight: 500;
+  font-size: 36rpx;
+  color: #333333;
+  box-sizing: content-box;
+}
+
+.btn-option {
+  display: flex;
+  width: 100%;
+  height: 96rpx;
+  border-top: 2rpx solid rgba(0, 0, 0, 0.04);
+}
+
+.btn-option div {
+  height: 100%;
+  text-align: center;
+  flex: 1;
+  line-height: 96rpx;
+  font-size: 38rpx;
+}
+
+.btn-option div:last-child {
+  border-left: 2rpx solid rgba(0, 0, 0, 0.04);
+  color: #1a79fb;
+}
+
+//productRelease.vue
+.release {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12rpx 12rpx 0 0;
+}
+
+.cancle-img {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+}
+
+.release-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-name {
+  display: block;
+  width: 120rpx;
+  height: 120rpx;
+  margin: auto;
+}
+
+.release-name {
+  font-family: PingFangSC-Medium;
+  text-align: center;
+  font-size: 32rpx;
+  color: #333333;
+}
+
+//WorkInfo.vue
+.worker {
+  width: 100%;
+  padding: 28rpx;
+  background: #ffffff;
+}
+
+.boss-look-him {
+  width: 138rpx;
+  height: 52rpx;
+  background-image: linear-gradient(90deg, #ff8b43 0%, #fe4f41 100%);
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.worker-label {
+  width: 60rpx;
+  height: 32rpx;
+  background: rgba(254, 85, 66, 0.06);
+  border-radius: 4rpx;
+  font-size: 24rpx;
+  color: #fe5542;
+  margin-left: 8rpx;
+  white-space: nowrap;
+}
+
+.worker-score {
+  margin-top: 16rpx;
+}
+
+.worker-intro {
+  margin-top: 18rpx;
+}
+
+.worker-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18rpx;
+}
+
+.worker-avatar {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 38rpx;
+}
+
+.worker-phone {
+  font-size: 28rpx;
+  color: #666666;
+  font-weight: bold;
+  margin: 0 24rpx;
+}
+
+//WorkingInformation.vue
+.job-label {
+  width: 9rpx;
+  height: 269rpx;
+  background: #fe5542;
+  border-radius: 12rpx 0 0 12rpx;
+}
+
+.job-give-reward {
+  width: 88rpx;
+  height: 42rpx;
+  background-image: linear-gradient(90deg, #ff8b43 0%, #fe4f41 100%);
+  border-radius: 6rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #ffffff;
+  margin-left: 10rpx;
+}
+
+.job-order {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 269rpx;
+  border-radius: 12rpx;
+}
+
+.job-order-info {
+  width: 100%;
+  height: 269rpx;
+  //background: #FFFFFF;
+  background: rgba(254, 85, 66, 0.02);
+}
+
+.job-order-require {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 24rpx;
+}
+
+.order-compensation {
+  width: 172rpx;
+  font-family: PingFangSC-Regular;
+}
+
+.order-require {
+  width: 100%;
+  padding-left: 24rpx;
+}
+
+.order-require-info {
+  width: 100%;
+  height: 64rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #333333;
+  margin-top: 14rpx;
+}
+
+.job-streamer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  // height: 48rpx;
+  background: rgba(254, 85, 66, 0.06);
+  padding: 20rpx 0 20rpx 24rpx;
+}
+
+.job-streamer-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 8rpx;
+}
+
+.job-order-title {
+  padding: 4rpx 0 16rpx 24rpx;
+  line-height: 1;
+}
+
+.job-order-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 220rpx;
+  height: 30rpx;
+  border: 2rpx solid #fe5542;
+  border-radius: 4rpx;
+  margin-top: 10rpx;
+}
+
+.order-label-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 66rpx;
+  height: 30rpx;
+  background: #fe5542;
+}
