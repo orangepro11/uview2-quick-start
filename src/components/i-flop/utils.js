@@ -1,4 +1,14 @@
 export default {
+	data() {
+		return {
+			whether: false,
+			flop: '点击翻开',
+			implement: 0,
+			surplus: false,
+			biutin: '点击翻开',
+			list: [],
+		}
+	},
 	methods: {
 		again(e) {
 			if (this.implement == 3 || this.implement == 0) {
@@ -32,9 +42,6 @@ export default {
 					this.implement = 2
 				}, 1200)
 		
-				setTimeout(res => {
-					this.maskShow = true
-				}, 1700)
 			}
 		},
 	}
