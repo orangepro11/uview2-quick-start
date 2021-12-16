@@ -338,6 +338,96 @@ export default { install };
 
 
 
+# 实用组件
+
+在src/components下封装了若干实用(花里胡哨)组件，组件通过easycom引入，可在任何地方直接引用到。
+
+
+
+## 礼花组件
+
+该组件用于展示礼花特效。
+
+```vue
+<template>
+	 <i-firework ref="firework"></i-firework>
+</template>
+
+<script>
+export default {
+    mounted() {
+        // 至少要在mounted生命周期之后才能可靠的获取到ref
+        this.$refs.firework.show(); // 主动调用，显示礼花
+    }
+}
+</script>
+```
+
+
+
+## loading组件
+
+该组件用于展示加载中特效，较uni.showLoading体验较好。
+
+```vue
+<template>
+	 <i-loading ref="loading"></i-loading>
+</template>
+
+<script>
+export default {
+    mounted() {
+        // 至少要在mounted生命周期之后才能可靠的获取到ref
+        this.$refs.loading.show(); // 主动调用，显示loading
+        setTimeount(() => {
+            this.$refs.loading.hide(); // 主动调用，关闭loading
+        }, 3000)
+    }
+}
+</script>
+```
+
+
+
+## 海报绘制组件
+
+该组件用于满足一般场景下的海报绘制。
+
+```vue
+<template>
+	<i-poster ref="poster" :width="750" :height="750">
+        <template v-slot="{src}">
+            <image :src="src" style="width: 750rpx;height: 750rpx;"></image>
+        </template>
+    </i-poster>
+</template>
+
+<script>
+export default {
+    mounted() {
+        let poster = this.$refs.poster;
+		uni.showLoading({
+			title: "渲染海报中"
+		});
+        const img = await poster
+                .setBackgroundColor("#F4F4F4") //指定渲染图片的背景色
+                .addRect(0, 0, 750, 198, "#FEFEFE") // 是个矩形
+                .addImage(require("@/static/logo.jpg"), 32, 48, 98, 98, true) // 添加图片
+                .addQRCode("http://www.baidu.com", 585, 22, 130, 130)
+                .addText("百度一下，你就知道", 581, 159, 20, "#333333")
+                .addImage(require("@/static/logo.jpg"), 19, 219, 707, 451) // 不要跨域
+                .addRect(0, 690, 750, 158, "#FEFEFE")
+                .draw();
+                uni.hideLoading();
+    }
+}
+</script>
+```
+
+
+
+
+
 # 全局样式
 
 在src/styles下提供全局样式，包括变量，混入等等。
