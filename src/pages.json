@@ -24,7 +24,12 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "可以填你的应用名称",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "backgroundColor": "#F8F8F8",
+    "backgroundColorTop":"#FFFFFF",
+    "app-plus" : {
+      "bounce" : "none"
+    },
+    "mp-alipay":{"allowsBounceVertical":"NO"}
   },
   "tabBar": {
     "color": "#333333",

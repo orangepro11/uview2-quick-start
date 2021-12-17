@@ -5,6 +5,15 @@
  */
 
 /**
+ * 检测当前是否为微信浏览器
+ * @returns Boolean 是否微信浏览器
+ */
+function isWechat() {
+	return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+}
+
+
+/**
  * 该方法用于在微信浏览器中唤起支付，参数说明如下：
  * appId: 公众号名称，由商户传入
  * timeStamp: 时间戳，自1970年以来的秒数
@@ -16,6 +25,9 @@
  * @returns {Promise<string>} 支付状态 ok/cancel/fail
  */
 export function pay(config) {
+	if (!isWechat()) {
+		return Promise.reject('请在微信浏览器中打开');
+	}
 
 	/**
 	 * 闭包函数，用于获取支付状态

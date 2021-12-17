@@ -410,18 +410,32 @@ export default {
 			title: "渲染海报中"
 		});
         const img = await poster
-                .setBackgroundColor("#F4F4F4") //指定渲染图片的背景色
-                .addRect(0, 0, 750, 198, "#FEFEFE") // 是个矩形
-                .addImage(require("@/static/logo.jpg"), 32, 48, 98, 98, true) // 添加图片
-                .addQRCode("http://www.baidu.com", 585, 22, 130, 130)
-                .addText("百度一下，你就知道", 581, 159, 20, "#333333")
-                .addImage(require("@/static/logo.jpg"), 19, 219, 707, 451) // 不要跨域
-                .addRect(0, 690, 750, 158, "#FEFEFE")
-                .draw();
-                uni.hideLoading();
+            .setBackgroundColor("#F4F4F4") //指定渲染图片的背景色
+            .addRect(0, 0, 750, 198, "#FEFEFE") // 是个矩形
+            .addImage(require("@/static/logo.jpg"), 32, 48, 98, 98, true) // 添加图片
+            .addQRCode("http://www.baidu.com", 585, 22, 130, 130)
+            .addText("百度一下，你就知道", 581, 159, 20, "#333333")
+            .addImage(require("@/static/logo.jpg"), 19, 219, 707, 451) // 不要跨域
+            .addRect(0, 690, 750, 158, "#FEFEFE")
+            .draw();
+            uni.hideLoading();
     }
 }
 </script>
+```
+
+
+
+# 实用函数
+
+在src/js_sdk里封装若干可直接使用的函数
+
+
+
+## H5微信支付
+
+```js
+import {pay} from ''
 ```
 
 
