@@ -76,7 +76,7 @@
     "stylus-loader": "3.0.2",
     "uni-simple-router": "^2.0.7",
     "uuid": "^8.3.2",
-    "uview-ui": "^2.0.13",
+    "uview-ui": "^2.0.19",
     "vue": "^2.6.11",
     "vue-class-component": "^6.3.2",
     "vue-property-decorator": "^8.0.0",
