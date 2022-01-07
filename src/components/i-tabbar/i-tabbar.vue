@@ -55,7 +55,7 @@ export default {
  
 <style lang="scss" scoped>
 .placeholder {
-	height: 50px;
+	height: 60px;
 }
 .i-tabbar {
 	position: fixed;

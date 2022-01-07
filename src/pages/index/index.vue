@@ -1,6 +1,6 @@
 <template>
   <div>
-    122
+    <i-navbar title="主页" :is-back="false"></i-navbar>
     <i-tabbar></i-tabbar>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default Vue.extend({
 </script>
 <style>
 page {
-  background-color: #f4f4f4;
+  background-color: var(--page);
 }
 </style>
 <style lang="scss" scoped></style>
