@@ -1,7 +1,17 @@
 <template>
   <view>
-    <canvas style="width: 256px; height: 256px" class="noSeeCanvas" canvas-id="CANVAS_EWM_DRAWER" id="CANVAS_EWM_DRAWER"></canvas>
-    <canvas :style="{ width: width + 'px', height: height + 'px' }" class="noSeeCanvas" canvas-id="CANVAS_DRAWER" id="CANVAS_DRAWER"></canvas>
+    <canvas
+      style="width: 256px; height: 256px"
+      class="noSeeCanvas"
+      canvas-id="CANVAS_EWM_DRAWER"
+      id="CANVAS_EWM_DRAWER"
+    ></canvas>
+    <canvas
+      :style="{ width: width + 'px', height: height + 'px' }"
+      class="noSeeCanvas"
+      canvas-id="CANVAS_DRAWER"
+      id="CANVAS_DRAWER"
+    ></canvas>
     <slot :src="src"></slot>
   </view>
 </template>
