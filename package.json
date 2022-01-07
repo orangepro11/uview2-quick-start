@@ -61,6 +61,7 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.10.7",
     "flyio": "^0.6.2",
+    "html2canvas": "^1.4.0",
     "jweixin-module": "^1.6.0",
     "less": "2.7.3",
     "less-loader": "7.3.0",
