@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <i-tabbar></i-tabbar>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,7 +16,7 @@ export default Vue.extend({
 </script>
 <style>
 page {
-  background-color: #fff;
+  background-color: #f4f4f4;
 }
 </style>
 <style lang="scss" scoped></style>
