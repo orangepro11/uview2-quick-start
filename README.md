@@ -371,7 +371,7 @@ export default {
 
 ```vue
 <template>
-	 <i-loading ref="loading"></i-loading>
+	 <muni-loading ref="loading"></muni-loading>
 </template>
 
 <script>
@@ -395,11 +395,11 @@ export default {
 
 ```vue
 <template>
-	<i-poster ref="poster" :width="750" :height="750">
+	<muni-poster ref="poster" :width="750" :height="750">
         <template v-slot="{src}">
             <image :src="src" style="width: 750rpx;height: 750rpx;"></image>
         </template>
-    </i-poster>
+    </muni-poster>
 </template>
 
 <script>

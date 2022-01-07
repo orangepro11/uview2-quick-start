@@ -1,5 +1,6 @@
 <template>
   <div>
+    122
     <i-tabbar></i-tabbar>
   </div>
 </template>
@@ -10,7 +11,7 @@ export default Vue.extend({
   data() {
     return {};
   },
-  mounted() {},
+  mounted() { },
   methods: {}
 });
 </script>
