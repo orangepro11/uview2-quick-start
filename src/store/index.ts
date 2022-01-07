@@ -15,4 +15,8 @@ export const store = new Vuex.Store({
   plugins: debug ? [createLogger()] : []
 });
 
-export default store;
+export default {
+  install(Vue) {
+    Vue.prototype.$store = store;
+  }
+};

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
 	name: 'MuniTabbar',
 	options: {
@@ -43,9 +43,9 @@ export default {
 		...mapGetters("tabs", ['index'])
 	},
 	methods: {
-		...mapActions("tabs", ["setTabIndex"]),
+		...mapMutations("tabs", ["SET_TAB_INDEX"]),
 		toggle(index) {
-			this.setTabIndex(index);
+			this.SET_TAB_INDEX(index);
 			console.log(this.index);
 		}
 	}
