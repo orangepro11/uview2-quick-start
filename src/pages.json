@@ -13,6 +13,13 @@
       }
     },
     {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/Login/Login",
       "style": {
         "navigationBarTitleText": "",

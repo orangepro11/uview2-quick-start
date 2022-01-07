@@ -3,8 +3,8 @@
 		<div class="placeholder"></div>
 		<div class="i-tabbar">
 			<div class="cu-bar tabbar bg-white">
-				<div class="action text-green" @click="toggle(0)">
-					<div class="cuIcon-homefill"></div>首页
+				<div :class="['action', index == 0 ? 'text-green' : 'text-gray']" @click="toggle(0)">
+					<div :class="index == 0 ? 'cuIcon-homefill' : 'cuIcon-home'"></div>首页
 				</div>
 				<div class="action text-gray" @click="toggle(1)">
 					<div class="cuIcon-similar"></div>分类
@@ -13,13 +13,13 @@
 					<button class="cu-btn cuIcon-add bg-green shadow"></button>
 					发布
 				</div>
-				<div class="action text-gray" @click="toggle(3)">
-					<div class="cuIcon-cart">
+				<div :class="['action', index == 3 ? 'text-green' : 'text-gray']" @click="toggle(3)">
+					<div :class="index == 3 ? 'cuIcon-cartfill' : 'cuIcon-cart'">
 						<div class="cu-tag badge">99</div>
 					</div>购物车
 				</div>
-				<div class="action text-gray" @click="toggle(4)">
-					<div class="cuIcon-my">
+				<div :class="['action', index == 4 ? 'text-green' : 'text-gray']" @click="toggle(4)">
+					<div :class="index == 4 ? 'cuIcon-myfill' : 'cuIcon-my'">
 						<div class="cu-tag badge">12</div>
 					</div>我的
 				</div>
@@ -29,6 +29,15 @@
 </template>
 
 <script>
+
+const List = [
+	"/pages/index/index",
+	"/pages/category/category",
+	"/pages/publish/publish",
+	"/pages/cart/cart",
+	"/pages/my/my"
+]
+
 import { mapGetters, mapMutations } from "vuex";
 export default {
 	name: 'MuniTabbar',
@@ -46,7 +55,7 @@ export default {
 		...mapMutations("tabs", ["SET_TAB_INDEX"]),
 		toggle(index) {
 			this.SET_TAB_INDEX(index);
-			console.log(this.index);
+			uni.$u.route(List[index]);
 		}
 	}
 }
