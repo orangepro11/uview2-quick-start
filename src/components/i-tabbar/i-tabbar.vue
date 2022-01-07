@@ -29,20 +29,25 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
 	name: 'MuniTabbar',
 	options: {
 		virtualHost: true
 	},
-	props: {
-		tabIndex: 0,
-	},
 	components: {},
 	data() {
 		return {};
 	},
+	computed: {
+		...mapGetters("tabs", ['index'])
+	},
 	methods: {
-		toggle(index) { }
+		...mapActions("tabs", ["setTabIndex"]),
+		toggle(index) {
+			this.setTabIndex(index);
+			console.log(this.index);
+		}
 	}
 }
 

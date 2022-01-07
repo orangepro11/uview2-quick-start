@@ -4,6 +4,8 @@ import uView from 'uview-ui';
 Vue.use(uView);
 Vue.config.productionTip = false;
 
+import store from './store';
+Vue.prototype.$store = store
 // 挂载总线实例
 // 通过this.$bus访问
 import Bus from '@/helpers/bus';
