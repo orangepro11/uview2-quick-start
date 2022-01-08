@@ -1,4 +1,4 @@
-import { setStorage, getStorage } from '../storage';
+import { set as setStorage, get as getStorage } from '../storage';
 
 /**
  * 获取地理位置信息，为了避免微信获取地理位置接口被封，每三分钟调用一次

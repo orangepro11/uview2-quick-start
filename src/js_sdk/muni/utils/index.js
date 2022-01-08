@@ -53,3 +53,28 @@ export function convertToFile(base64) {
     type: mime
   }); // 返回文件对象
 }
+
+export function getPage() {
+  const pages = getCurrentPages();
+  if(pages.length <= 0) {
+    return '';
+  }
+  return pages[pages.length - 1];
+}
+
+export function alert(content, showCancel) {
+  return new Promise((resolve, reject) => {
+    uni.showModal({
+      title: '温馨提示',
+      content,
+      showCancel,
+      success: ({ confirm }) => {
+        confirm ? resolve('ok') : reject('cancel');
+      },
+      fail: () => {
+        reject('fail');
+      }
+    });
+  });
+}
+

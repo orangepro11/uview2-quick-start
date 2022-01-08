@@ -3,6 +3,8 @@ import * as utils from './utils';
 import * as file from './file';
 import * as wechat from './wechat';
 
+import mixins from './mixins';
+
 const muni = {
   storage,
   utils,
@@ -15,13 +17,16 @@ const muni = {
     if (platform === 'h5') {
       return wechat.H5Pay(payload);
     }
-  }
+  },
+  page: utils.page,
+  alert: utils.alert,
 };
 
 uni.$m = muni;
 
 export default {
   install(Vue) {
+    Vue.mixin(mixins);
     Vue.prototype.$m = muni;
   }
 };

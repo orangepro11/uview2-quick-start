@@ -11,7 +11,9 @@ export default Vue.extend({
   data() {
     return {};
   },
-  async mounted() {},
+  async mounted() {
+    
+  },
   methods: {}
 });
 </script>

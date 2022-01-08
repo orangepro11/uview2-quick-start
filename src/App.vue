@@ -2,9 +2,19 @@
 import Vue from 'vue';
 export default Vue.extend({
   mpType: 'app',
-  onLaunch() {},
+  globalData: {
+    
+  },
+  onLaunch(options) {
+    if(process.env.NODE_ENV == 'development') {
+      uni.redirectTo({
+        url: '/pages/index/index'
+      })
+    }
+    
+  },
   onShow() {},
-  onHide() {}
+  onHide() {},
 });
 </script>
 
