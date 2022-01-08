@@ -1,9 +1,17 @@
 import * as storage from './storage';
 import * as utils from './utils';
+import * as file from './file';
 
 const muni = {
   storage,
-  utils
+  utils,
+  file
 };
 
-export default muni;
+uni.$m = muni;
+
+export default {
+  install(Vue) {
+    Vue.prototype.$m = muni;
+  }
+};

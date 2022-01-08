@@ -1,13 +1,11 @@
 <template>
   <div>
     <i-navbar title="主页" :is-back="false"></i-navbar>
-    <i-poster ref="poster" @finish="onFinish">
-      <div>
-        <image
-          src="https://images.unsplash.com/photo-1641499303764-a9e3a93a72e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
-        />
-      </div>
-    </i-poster>
+    <muni-poster ref="poster" :width="700" :height="600">
+      <template v-slot="{ src }">
+        <img :src="src" alt="" style="margin: 0 auto;width: 700px;height: 600px" />
+      </template>
+    </muni-poster>
     <i-tabbar></i-tabbar>
   </div>
 </template>
@@ -16,14 +14,23 @@
 import Vue from 'vue';
 export default Vue.extend({
   data() {
-    return {};
+    return {
+      posterImage: '',
+      userImage: ''
+    };
   },
-  mounted() {
-    this.$refs.poster.draw();
+  async mounted() {
+    const { poster } = this.$refs;
+    this.userImage = await uni.$m.file.toBase64(require('@/static/logo.png'));
+    poster.addImage(this.userImage, 50, 0, 250, 250);
+    poster.addText('这是一张海报', 76, 205, 30, 'red', 453, false, 40);
+
+    await poster.draw();
   },
   methods: {
     onFinish(url) {
       console.log(url);
+      this.posterImage = url;
     }
   }
 });
@@ -33,4 +40,21 @@ page {
   background-color: var(--page);
 }
 </style>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.poster {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #f5f5f5, #fff);
+}
+.text {
+  margin-top: 20rpx;
+  color: #fff;
+}
+.resultImage {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+</style>
