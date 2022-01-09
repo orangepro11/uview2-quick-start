@@ -16,40 +16,50 @@ let LoginPage = 'pages/Login/Login';
 export default {
   computed: {
     ...mapGetters('auth', ['UserInfo']), // 全局混入用户信息
+    $m() {
+      // 选择性的混入$m对象，防止性能问题
+      return {
+        before: uni.$m.before,
+        after: uni.$m.after,
+        chain: uni.$m.compose,
+      }
+    }
   },
   async created() {
-    let { route:page } = getPage();
-    if(!page || WhiteList.includes(page) || VisitedPage.has(page) || page == LoginPage) {
+    let { route: page } = getPage();
+    if (!page || WhiteList.includes(page) || VisitedPage.has(page) || page == LoginPage) {
       return;
-    }else {
+    } else {
       currentPage = page;
-      if(!await this.$auth()) {
+      if (!await this.$auth()) {
         uni.$u.route(LoginPage);
       } else {
         VisitedPage.add(page);
       }
-      
+
     }
   },
   methods: {
-    ...mapActions('auth', ['setUserInfo','clearUserInfo']),
+    ...mapActions('auth', ['setUserInfo', 'clearUserInfo']),
+    ...mapActions('tabs', ['setTabIndex']),
     async $auth(payload) {
 
-      if(payload) {
+      if (payload) {
         uni.$m.storage.set('UserInfo', payload);
         this.setUserInfo(payload);
       }
 
       let userInfo = this.UserInfo;
-      if(isEmpty(userInfo)) {
+      if (isEmpty(userInfo)) {
         // 尝试从缓存中取
         try {
           userInfo = await uni.$m.storage.get("UserInfo");
-        }catch(e) {}     
+        } catch (e) { }
       }
       return !isEmpty(userInfo)
     },
     $return() {
+      console.log()
       VisitedPage.delete(currentPage); // 从访问列表中删除，以便下次继续验证
       uni.$u.route({
         type: 'redirect',
@@ -58,8 +68,12 @@ export default {
     },
     $logout() {
       this.clearUserInfo(); // 清空用户信息
-      this.currentPage = ''; // 下次登录的时候去首页 
-      uni.$u.route(LoginPage); // 去登录页
+      currentPage = ''; // 下次登录的时候去首页 
+      this.setTabIndex(0); // 设置tabbar
+      uni.$u.route({
+        type: 'redirect',
+        url: LoginPage,
+      }); // 去登录页
     }
   },
 };

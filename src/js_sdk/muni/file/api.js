@@ -45,3 +45,21 @@ export function toBase64(img) {
     });
   });
 }
+
+
+/**
+ * Base64转文件对象
+ */
+export function convertToFile(base64) {
+  let arr = base64.split(',');
+  let mime = arr[0].match(/:(.*?);/)[1]; // 获取文件的mime类型
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n); // 字节流数组
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n); // 逐字节编码
+  }
+  return new File([u8arr], '', {
+    type: mime
+  }); // 返回文件对象
+}

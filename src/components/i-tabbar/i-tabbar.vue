@@ -52,15 +52,9 @@ export default {
 		...mapGetters("tabs", ['index'])
 	},
 	methods: {
-		...mapMutations("tabs", ["SET_TAB_INDEX"]),
 		toggle(index) {
-			this.SET_TAB_INDEX(index);
-			uni.navigateTo({
-				url: '/' + List[index],
-				fail: e => {
-					console.log(e)
-				}
-			})
+			this.setTabIndex(index); // 这是全局混入的方法，用来更新tabbar
+			uni.$m.open(List[index]);
 		}
 	}
 }

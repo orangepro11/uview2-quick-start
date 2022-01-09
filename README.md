@@ -420,19 +420,169 @@ export default {
 
 
 
-# 实用函数
+# uni.$m对象
 
-在src/js_sdk里封装若干可直接使用的函数
+这个是对一些常用操作的全局封装，它们有的是uni原生api的二次封装，有的是脱胎于实际场景的方法。
 
 
 
-## H5微信支付
+## 类型检测typeOf
+
+这个是对内置的typeof关键字的增强，用来弥补无法准确判断null，Date等类型的不足，类型为**全小写**。
+
+
+
+### 示例
 
 ```js
-import {pay} from ''
+uni.$m.typeOf(new Date()) // date
 ```
 
 
+
+### 可能的返回值
+
+| 返回值           | 说明       |
+| ---------------- | ---------- |
+| number           | 数字类型   |
+| string           | 字符串类型 |
+| object           | 对象       |
+| null             | 空         |
+| undefined        | 尚未定义   |
+| date             | 日期类型   |
+| htmlcollection   | DOM集合    |
+| html[xxx]element | DOM对象    |
+| set              | 集合       |
+| map              | 哈希表     |
+| array            | 数组       |
+
+
+
+> typeOf几乎涵盖了所有可能的类型，推荐在所有需要进行类型判断的场景下优先使用它。
+
+
+
+## 面向切面的程序设计 
+
+在vm下的$m里封装了一些暴露函数切面的方法，有before，after和chain
+
+
+
+### 前置执行函数before
+
+应用场景：用于在提交表单之前需要校验参数等场景
+
+
+
+```vue
+<template>
+	<button @click="$m.before(onClick, beforeOnClick)(123)">点我</button>
+</template> 
+
+<script>
+export default {
+    methods: {
+        onClick(e) {
+            console.log(e); // 123
+            console.log('你点击了按钮');
+        },
+        beforeOnClick() {
+            console.log('在你点击按钮之前触发');
+            // return false; // 如果return false，则不会往下执行下面的函数
+        },
+    }
+}
+</script>
+```
+
+
+
+### 后置执行函数
+
+场景：一般不会用到，如果你在执行函数A以后还要做一些收尾工作则可以考虑用。
+
+```vue
+<template>
+	<button @click="$m.after(onClick, afterOnClick)(123)">点我</button>
+</template> 
+
+<script>
+export default {
+    methods: {
+        onClick(e) {
+            console.log(e); // 123
+            console.log('你点击了按钮');
+        },
+        afterOnClick() {
+            console.log('在你点击按钮之后触发');
+        },
+    }
+}
+</script>
+```
+
+
+
+注意事项：以下写法不会执行：
+
+```vue
+<button @click="$m.after(onClick, afterOnClick)">点我</button> // 不会执行
+```
+
+一定要至少空执行：
+
+```vue
+<button @click="$m.after(onClick, afterOnClick)()">点我</button> // 会执行，但没有参数
+```
+
+如果需要接受参数:
+
+```vue
+<button @click="$m.after(onClick, afterOnClick)($event)">点我</button> // 会执行，也有参数。完美
+```
+
+
+
+> before和after在某些情况下可以互换，只要你逻辑转的过来。
+
+
+
+### 函数链接
+
+这是面向切面编程的最终方案，可以让你专心于单一职责函数的实现，最后用它组合起来流程。
+
+
+
+```vue
+<template>
+	<button @click="$m.chain(beforeOnClick, onClick, afterOnClick)(1)">点我</button>
+</template> 
+
+<script>
+export default {
+    methods: {
+        beforeOnClick(e) {
+          console.log(e); // [1]，注意是个数组
+          console.log('在你点击按钮之前触发');
+          return e[0] + 1; // 传给下一个函数的参数
+        },
+        onClick(e) {
+          console.log(e); // 这时候就不是数组了，上一个函数return什么就是什么
+          console.log('你点击了按钮');
+          return e + 1; // 传给下一个函数的参数
+        },
+        afterOnClick(e) {
+          console.log(e); // 上一个函数return什么就是什么
+          console.log('在你点击按钮之后触发');
+        }
+    }
+}
+</script>
+```
+
+
+
+注意事项：同上。
 
 
 
