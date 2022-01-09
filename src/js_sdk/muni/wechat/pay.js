@@ -1,0 +1,78 @@
+/**
+ * 此为H5端腾讯微信支付接口
+ * @author 不爱喝橙子汁
+ * @version 1.0.0
+ */
+
+import { isWechat } from './utils';
+import { match } from '../utils';
+
+const isUrl = match(/^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/);
+
+/**
+ * 该方法用于在微信浏览器中唤起支付，参数说明如下：
+ * appId: 公众号名称，由商户传入
+ * timeStamp: 时间戳，自1970年以来的秒数
+ * nonceStr: 随机串
+ * package: 商品ID，由商户传入
+ * signType: 微信签名方式：
+ * paySign: 微信签名
+ * @param {Object} config 唤起支付所需要的传输，一般由后台传即可
+ * @returns {Promise<string>} 支付状态 ok/cancel/fail
+ * @example await uni.$m.H5Pay(config);
+ */
+export function H5Pay(config) {
+  if (!isWechat()) {
+    if (!isUrl(config)) {
+      return Promise.reject('请在微信浏览器中打开');
+    } else {
+      window.location.href = config;
+    }
+  }
+
+  /**
+   * 闭包函数，用于获取支付状态
+   * @returns {Promise<string>} 支付状态 ok/cancel/fail
+   */
+  function onBridgeReady() {
+    return new Promise((resolve, reject) => {
+      WeixinJSBridge.invoke('getBrandWCPayRequest', config, res => {
+        if (res.err_msg == 'get_brand_wcpay_request:ok') {
+          resolve('ok');
+        } else if (res.err_msg == 'get_brand_wcpay_request:cancel') {
+          reject('cancel');
+        } else {
+          reject('fail');
+        }
+      });
+    });
+  }
+
+  if (typeof WeixinJSBridge === 'undefined') {
+    // 如果没有WeixinJSBridge，则说明不是在微信中打开的
+    if (document.addEventListener) {
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    } else if (document.attachEvent) {
+      // 如果是IE浏览器，则直接调用onBridgeReady
+      document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+      document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    } else {
+      // 否则，直接调用onBridgeReady
+      return onBridgeReady();
+    }
+  }
+}
+
+export function MiniProgramPay(config) {
+  return new Promise((resolve, reject) => {
+    uni.requestPayment({
+      ...config,
+      success(res) {
+        resolve(res);
+      },
+      fail(err) {
+        reject(err);
+      }
+    });
+  });
+}

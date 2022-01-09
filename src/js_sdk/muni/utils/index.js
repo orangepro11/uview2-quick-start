@@ -36,3 +36,45 @@ export function uuid() {
     return v.toString(16);
   });
 }
+
+/**
+ * Base64转文件对象
+ */
+export function convertToFile(base64) {
+  let arr = base64.split(',');
+  let mime = arr[0].match(/:(.*?);/)[1]; // 获取文件的mime类型
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n); // 字节流数组
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n); // 逐字节编码
+  }
+  return new File([u8arr], '', {
+    type: mime
+  }); // 返回文件对象
+}
+
+export function getPage() {
+  const pages = getCurrentPages();
+  if(pages.length <= 0) {
+    return '';
+  }
+  return pages[pages.length - 1];
+}
+
+export function alert(content, showCancel) {
+  return new Promise((resolve, reject) => {
+    uni.showModal({
+      title: '温馨提示',
+      content,
+      showCancel,
+      success: ({ confirm }) => {
+        confirm ? resolve('ok') : reject('cancel');
+      },
+      fail: () => {
+        reject('fail');
+      }
+    });
+  });
+}
+

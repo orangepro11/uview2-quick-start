@@ -2,7 +2,7 @@
   <view>
     <image src="@/static/login/login.png" class="login-logo" />
     <view class="title">账号登录</view>
-    <view class="form">
+    <view class="form" v-if="!isWechat">
       <u--input v-model="username" class="input" placeholder="账号" shape="circle" focus clearable>
         <template v-slot:prefix>
           <image src="@/static/login/username.png" class="username-icon" />
@@ -17,6 +17,9 @@
 
       <u-button class="button" @click="handleLogin">登录</u-button>
     </view>
+    <div v-else>
+      <u-button class="button" @click="handleLogin">微信一键授权</u-button>
+    </div>
   </view>
 </template>
 
@@ -27,6 +30,7 @@ export default Vue.extend({
   components: {},
   data() {
     return {
+      isWechat: uni.$u.platform == 'weixin',
       username: '',
       password: '',
     };
@@ -36,7 +40,13 @@ export default Vue.extend({
      * 登录方法
      */
     handleLogin() {
-
+      if(this.username == 'admin' && this.password == 'admin') {
+        this.$auth({
+          id: 1,
+          nickname: '不爱喝橙子汁'
+        });
+        this.$return();
+      }
     }
   },
   computed: {

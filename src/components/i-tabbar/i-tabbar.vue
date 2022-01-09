@@ -31,11 +31,11 @@
 <script>
 
 const List = [
-	"/pages/index/index",
-	"/pages/category/category",
-	"/pages/publish/publish",
-	"/pages/cart/cart",
-	"/pages/my/my"
+	"pages/index/index",
+	"pages/category/category",
+	"pages/publish/publish",
+	"pages/cart/cart",
+	"pages/my/my"
 ]
 
 import { mapGetters, mapMutations } from "vuex";
@@ -55,7 +55,12 @@ export default {
 		...mapMutations("tabs", ["SET_TAB_INDEX"]),
 		toggle(index) {
 			this.SET_TAB_INDEX(index);
-			uni.$u.route(List[index]);
+			uni.navigateTo({
+				url: '/' + List[index],
+				fail: e => {
+					console.log(e)
+				}
+			})
 		}
 	}
 }

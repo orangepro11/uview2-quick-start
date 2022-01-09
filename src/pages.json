@@ -13,6 +13,13 @@
       }
     },
     {
+      "path": "pages/cart/cart",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/my/my",
       "style": {
         "navigationBarTitleText": "",
