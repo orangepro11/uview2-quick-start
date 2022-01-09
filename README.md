@@ -332,12 +332,6 @@ export default { install };
 
 
 
-## 警告框
-
-通过src/helpers/alert下提供了模态警告框，在执行危险操作时警告用户。
-
-
-
 # 实用组件
 
 在src/components下封装了若干实用(花里胡哨)组件，组件通过easycom引入，可在任何地方直接引用到。
@@ -478,4 +472,4 @@ import {pay} from ''
 
 # 关于uview2版本
 
-该项目基于uview2.0.13非稳定版，后续会持续更新。
+该项目基于uview2.0.19非稳定版，后续会持续更新。
