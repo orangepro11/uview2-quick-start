@@ -13,22 +13,7 @@ export default Vue.extend({
     return {};
   },
   async mounted() {},
-  methods: {
-    beforeOnClick(e) {
-      console.log(e); // [1]，注意是个数组
-      console.log('在你点击按钮之前触发');
-      return e[0] + 1; // 传给下一个函数的参数
-    },
-    onClick(e) {
-      console.log(e); // 这时候就不是数组了，上一个函数return什么就是什么
-      console.log('你点击了按钮');
-      return e + 1; // 传给下一个函数的参数
-    },
-    afterOnClick(e) {
-      console.log(e); //
-      console.log('在你点击按钮之后触发');
-    }
-  }
+  methods: {}
 });
 </script>
 
