@@ -1,7 +1,7 @@
 <template>
   <div>
     <i-navbar title="主页" :is-back="false"></i-navbar>
-    <u-button text="点我"></u-button>
+
     <i-tabbar></i-tabbar>
   </div>
 </template>
@@ -12,9 +12,7 @@ export default Vue.extend({
   data() {
     return {};
   },
-  async mounted() {
-
-  },
+  async mounted() {},
   methods: {
     beforeOnClick(e) {
       console.log(e); // [1]，注意是个数组
@@ -27,17 +25,13 @@ export default Vue.extend({
       return e + 1; // 传给下一个函数的参数
     },
     afterOnClick(e) {
-      console.log(e); // 
+      console.log(e); //
       console.log('在你点击按钮之后触发');
     }
   }
 });
 </script>
-<style>
-page {
-  background-color: var(--page);
-}
-</style>
+
 <style lang="scss" scoped>
 .poster {
   display: flex;
