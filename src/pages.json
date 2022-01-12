@@ -7,28 +7,28 @@
   },
   "pages": [
     {
-      "path": "pages/index/index",
+      "path": "pages/TabBar/index/index",
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/cart/cart",
+      "path": "pages/TabBar/cart/cart",
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/my/my",
+      "path": "pages/TabBar/my/my",
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/Login/Login",
+      "path": "pages/login/login",
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "custom",
@@ -38,7 +38,7 @@
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "可以填你的应用名称",
+    "navigationBarTitleText": "uview2-quick-start",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "backgroundColorTop": "#FFFFFF",
@@ -48,5 +48,31 @@
     "mp-alipay": {
       "allowsBounceVertical": "NO"
     }
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#0000ff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/TabBar/index/index",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/TabBar/cart/cart",
+        "iconPath": "static/tabbar/cart.png",
+        "selectedIconPath": "static/tabbar/cart-active.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/TabBar/my/my",
+        "iconPath": "static/tabbar/user.png",
+        "selectedIconPath": "static/tabbar/user-active.png",
+        "text": "个人中心"
+      }
+    ]
   }
 }

@@ -1,12 +1,9 @@
 <template>
   <div>
-    <!-- <i-navbar title="个人中心" :is-back="false"></i-navbar> -->
-    <u-navbar></u-navbar>
+    <i-navbar title="个人中心" :is-back="false"></i-navbar>
     <u-cell-group custom-style="margin-top: 20px;padding: 0 20rpx">
       <u-cell custom-style="background: #fff" size="large" title="清除缓存" @click="onClearStorage"></u-cell>
     </u-cell-group>
-
-    <i-tabbar></i-tabbar>
   </div>
 </template>
 

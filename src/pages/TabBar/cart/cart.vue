@@ -1,8 +1,6 @@
 <template>
   <div>
     <i-navbar title="购物车" :is-back="false"></i-navbar>
-    <!-- <u-navbar></u-navbar> -->
-    <i-tabbar></i-tabbar>
   </div>
 </template>
 
@@ -20,4 +18,4 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>
