@@ -1,7 +1,6 @@
 <template>
   <div>
-    <u-navbar></u-navbar>
-    <!-- <i-navbar title="主页" :is-back="false"></i-navbar> -->
+    <i-navbar title="主页" :is-back="false"></i-navbar>
     <!-- <u-calendar monthNum="12" mode="range" :show="true" :minDate="minDate" :maxDate="maxDate" :defaultDate="defaultDate"></u-calendar> -->
 
     <i-tabbar></i-tabbar>

@@ -3,22 +3,22 @@
     <image src="@/static/login/login.png" class="login-logo" />
     <view class="title">账号登录</view>
     <view class="form" v-if="!isWechat">
-      <u--input v-model="username" class="input" placeholder="账号" shape="circle" focus clearable>
+      <u--input :custom-style="firstInputStyle" v-model="username" class="input" placeholder="账号" shape="circle" focus clearable>
         <template v-slot:prefix>
           <image src="@/static/login/username.png" class="username-icon" />
         </template>
       </u--input>
 
-      <u--input v-model="password" class="input" placeholder="账号" shape="circle" focus clearable password>
+      <u--input :custom-style="secondInputStyle" v-model="password" class="input" placeholder="账号" shape="circle" focus clearable password>
         <template v-slot:prefix>
           <image src="@/static/login/password.png" class="username-icon" />
         </template>
       </u--input>
 
-      <u-button class="button" @click="handleLogin">登录</u-button>
+      <u-button :custom-style="buttonStyle" @click="handleLogin">登录</u-button>
     </view>
     <div v-else>
-      <u-button class="button" @click="handleLogin">微信一键授权</u-button>
+      <u-button :custom-style="buttonStyle" class="button" @click="handleLogin">微信一键授权</u-button>
     </div>
   </view>
 </template>
@@ -40,17 +40,37 @@ export default Vue.extend({
     /**
      * 登录方法
      */
-    handleLogin() {
+    handleLogin(): void {
       if (this.username == 'admin' && this.password == 'admin') {
         this.$auth({
           id: 1,
           nickname: '不爱喝橙子汁'
         });
-        this.$return();
+        this.$return(); // 这是封装在mixin的方法，可以直接返回上一页
       }
     }
   },
-  computed: {},
+  computed: {
+    buttonStyle(): string {
+      // @ts-ignore
+      return uni.$m.jss.customButton;
+    },
+    firstInputStyle(): string {
+      return `
+        height: 76rpx;
+        background: rgba(132, 183, 255, 0.1);
+        border: 1rpx solid #83b5ff;
+      `;
+    },
+    secondInputStyle(): string {
+      return `
+        height: 76rpx;
+        background: rgba(132, 183, 255, 0.1);
+        border: 1rpx solid #83b5ff;
+        margin-top: 45rpx;
+      `;
+    }
+  },
   mounted() {}
 });
 </script>
@@ -94,7 +114,6 @@ export default Vue.extend({
   margin-right: 23rpx;
   margin-left: 18rpx;
 }
-
 .button {
   background: linear-gradient(90deg, #59c0ff, #1795ff);
   color: #fff;

@@ -1,14 +1,16 @@
 <template>
-  <div></div>
+  <div>
+    <u-navbar placeholder :border="false" fixed :title="title" :autoBack="isBack" @leftClick="onLeftClick" :bg-color="bgColor">
+      <template slot="left">
+        <div></div>
+      </template>
+    </u-navbar>
+  </div>
 </template>
 
 <script>
-import MNavBar from '@/uview-ui/components/u-navbar/u-navbar';
 export default {
   name: 'INavbar',
-  components: {
-    MNavBar
-  },
   props: {
     title: {
       type: String,
