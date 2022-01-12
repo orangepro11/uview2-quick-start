@@ -4,7 +4,7 @@ declare module '*.vue' {
 }
 
 declare module 'uview-ui' {
-  import uViewUI from 'uview-ui';
+  import uViewUI from '@/uview-ui';
   export default uViewUI;
 }
 

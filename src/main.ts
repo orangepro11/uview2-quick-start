@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
-import uView from 'uview-ui';
+import uView from '@/uview-ui';
 Vue.use(uView);
 
 import muni from '@/js_sdk/muni';
