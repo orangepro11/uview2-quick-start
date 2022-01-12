@@ -45,9 +45,10 @@
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     "paths": {
       "@/*": ["./src/*"],
-      "@js/*": ["./src/js_sdk/*"],
+      "@js/*": ["./src/js_sdk/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */
     // "types": [],                           /* Type declaration files to be included in compilation. */
@@ -69,5 +70,6 @@
     /* Advanced Options */
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
-  }
+  },
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

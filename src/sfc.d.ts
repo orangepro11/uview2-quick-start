@@ -23,6 +23,18 @@ declare module 'vue/types/vue' {
   }
 }
 
+declare module '@types/uni-app/lib/uni' {
+  interface Uni {
+    $u: any;
+    $m: any;
+  }
+}
+
+declare class Uni {
+  $u: any;
+  $m: any;
+}
+
 declare module 'App' {
   import App from './App.vue';
   export default App;
@@ -33,4 +45,5 @@ declare module 'uni-simple-router' {
   export default uniSimpleRouter;
 }
 
-declare const uni: any;
+declare var window: any;
+declare const uni: Uni;

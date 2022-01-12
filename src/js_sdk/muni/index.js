@@ -13,13 +13,16 @@ function pay(payload) {
   if (platform === 'h5') {
     return wechat.H5Pay(payload);
   }
-};
+}
 
-const muni = uni.$u.deepMerge({
-  storage,
-  file,
-  pay,
-}, utils);
+const muni = uni.$u.deepMerge(
+  {
+    storage,
+    file,
+    pay
+  },
+  utils
+);
 
 uni.$m = muni;
 

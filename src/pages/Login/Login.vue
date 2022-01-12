@@ -30,9 +30,10 @@ export default Vue.extend({
   components: {},
   data() {
     return {
+      // @ts-ignore
       isWechat: uni.$u.platform == 'weixin',
       username: '',
-      password: '',
+      password: ''
     };
   },
   methods: {
@@ -40,7 +41,7 @@ export default Vue.extend({
      * 登录方法
      */
     handleLogin() {
-      if(this.username == 'admin' && this.password == 'admin') {
+      if (this.username == 'admin' && this.password == 'admin') {
         this.$auth({
           id: 1,
           nickname: '不爱喝橙子汁'
@@ -49,12 +50,8 @@ export default Vue.extend({
       }
     }
   },
-  computed: {
-
-  },
-  mounted() {
-
-  }
+  computed: {},
+  mounted() {}
 });
 </script>
 

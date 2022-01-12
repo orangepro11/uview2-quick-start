@@ -1,8 +1,8 @@
 {
   "easycom": {
+    "^i-(.*)": "@/components/i-$1/i-$1.vue",
     "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue",
-    "^muni-(.*)": "muni/components/muni-$1/muni-$1.vue",
-    "^i-(.*)": "components/i-$1/i-$1.vue"
+    "^muni-(.*)": "@/muni/components/muni-$1/muni-$1.vue"
   },
   "pages": [
     {
@@ -40,17 +40,12 @@
     "navigationBarTitleText": "可以填你的应用名称",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
-    "backgroundColorTop":"#FFFFFF",
-    "app-plus" : {
-      "bounce" : "none"
+    "backgroundColorTop": "#FFFFFF",
+    "app-plus": {
+      "bounce": "none"
     },
-    "mp-alipay":{"allowsBounceVertical":"NO"}
-  },
-  "tabBar": {
-    "color": "#333333",
-    "selectedColor": "#1A97FF",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": []
+    "mp-alipay": {
+      "allowsBounceVertical": "NO"
+    }
   }
 }
