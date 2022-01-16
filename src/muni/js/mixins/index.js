@@ -2,7 +2,7 @@ import { mapGetters, mapActions } from 'vuex';
 import { getPage } from '../utils';
 
 const isEmpty = (obj) => {
-  return Object.keys(obj).length == 0 || !obj.hasOwnProperty('id') || obj["id"] == 0;
+  return obj && Object.keys(obj).length == 0 || !obj.hasOwnProperty('id') || obj["id"] == 0;
 }
 
 // 不需要授权的白名单
