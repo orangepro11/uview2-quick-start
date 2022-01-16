@@ -19,7 +19,13 @@ declare module 'vue/types/vue' {
     $u: any;
     $bus: any;
     mescrollInit: any;
-    $m: any;
+    $Trigger: (name?: string, ...args?: any[]) => void;
+  }
+}
+
+declare module "vue/types/options" {
+  interface ComponentOptions<V extends Vue> {
+    events?: Record<string, string | ((this: V, ...args: any[]) => void)>
   }
 }
 
