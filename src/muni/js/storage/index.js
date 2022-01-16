@@ -9,7 +9,9 @@ export function set(key, value) {
       key,
       data: value,
       success: resolve,
-      fail: reject
+      fail: () => {
+        resolve(undefined)
+      }
     });
   });
 }
@@ -25,7 +27,9 @@ export function get(key) {
       success: ({ data }) => {
         resolve(data);
       },
-      fail: reject
+      fail: () => {
+        resolve(undefined);
+      }
     });
   });
 }
@@ -35,7 +39,6 @@ export function remove(key) {
     uni.removeStorage({
       key,
       success: resolve,
-      fail: reject
     });
   });
 }
@@ -44,7 +47,6 @@ export function clear() {
   return new Promise((resolve, reject) => {
     uni.clearStorage({
       success: resolve,
-      fail: reject
     });
   });
 }
