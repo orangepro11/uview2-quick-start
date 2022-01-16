@@ -351,7 +351,7 @@ export default Vue.extend({
     }
   },
   created() {
-    // events与$Trigger一般是跨组件层级的，这里为便于展示写在了同一组件内
+    // events与$Trigger通常是跨组件层级的，这里为便于展示写在了同一组件内
     this.$Trigger('aa')
     this.$Trigger('bb', 1, 2, 3)
     this.$Trigger('bb', 1, 2, 3)
