@@ -5,6 +5,7 @@ const isEmpty = (obj) => {
   return Object.keys(obj).length == 0 || !obj.hasOwnProperty('id') || obj["id"] == 0;
 }
 
+// 不需要授权的白名单
 const WhiteList = [
   "pages/index/index",
 ];
@@ -36,12 +37,10 @@ export default {
       } else {
         VisitedPage.add(page);
       }
-
     }
   },
   methods: {
-    ...mapActions('auth', ['setUserInfo', 'clearUserInfo']),
-    ...mapActions('tabs', ['setTabIndex']),
+    ...mapActions('auth', ['setUserInfo', 'clearUserInfo']), // 全局混入
     async $auth(payload) {
 
       if (payload) {
@@ -59,7 +58,6 @@ export default {
       return !isEmpty(userInfo)
     },
     $return() {
-      console.log()
       VisitedPage.delete(currentPage); // 从访问列表中删除，以便下次继续验证
       uni.$u.route({
         type: 'redirect',
@@ -69,7 +67,6 @@ export default {
     $logout() {
       this.clearUserInfo(); // 清空用户信息
       currentPage = ''; // 下次登录的时候去首页 
-      this.setTabIndex(0); // 设置tabbar
       uni.$u.route({
         type: 'redirect',
         url: LoginPage,
