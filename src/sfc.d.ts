@@ -19,7 +19,7 @@ declare module 'vue/types/vue' {
     $u: any;
     $bus: any;
     mescrollInit: any;
-    $Trigger: (name?: string, ...args?: any[]) => void;
+    $Trigger: (name: string, ...args?: any[]) => void;
   }
 }
 
