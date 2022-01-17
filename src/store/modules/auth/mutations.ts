@@ -5,6 +5,6 @@ export default {
     state.UserInfo = UserInfo;
   },
   [types.CLEAR_USER_INFO](state) {
-    state.UserInfo = undefined;
+    state.UserInfo = {};
   }
 };

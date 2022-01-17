@@ -1,11 +1,14 @@
 import { mapGetters, mapActions } from 'vuex';
 import { getPage } from '../utils';
 
-const isEmpty = obj => {
-  return Object.keys(obj).length == 0 || !obj.hasOwnProperty('id') || obj['id'] == 0;
-};
+const isEmpty = (obj) => {
+  return obj && Object.keys(obj).length == 0 || !obj.hasOwnProperty('id') || obj["id"] == 0;
+}
 
-const WhiteList = ['pages/index/index'];
+// 不需要授权的白名单
+const WhiteList = [
+  "pages/index/index",
+];
 
 const VisitedPage = new Set();
 let currentPage;
@@ -42,8 +45,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setUserInfo', 'clearUserInfo']),
-    ...mapActions('tabs', ['setTabIndex']),
+    ...mapActions('auth', ['setUserInfo', 'clearUserInfo']), // 全局混入
     async $auth(payload) {
       if (payload) {
         uni.$m.storage.set('UserInfo', payload);
@@ -61,16 +63,11 @@ export default {
     },
     $return() {
       console.log();
-      VisitedPage.delete(currentPage); // 从访问列表中删除，以便下次继续验证
-      uni.$u.route({
-        type: 'redirect',
-        url: currentPage || '/pages/index/index'
-      });
     },
     $logout() {
       this.clearUserInfo(); // 清空用户信息
       currentPage = ''; // 下次登录的时候去首页
-      this.setTabIndex(0); // 设置tabbar
+      currentPage = ''; // 下次登录的时候去首页 
       uni.$u.route({
         type: 'redirect',
         url: LoginPage

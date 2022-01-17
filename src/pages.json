@@ -28,7 +28,7 @@
       }
     },
     {
-      "path": "pages/login/login",
+      "path": "pages/Login/Login",
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "custom",
