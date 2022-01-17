@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import { deepMergeObjects, getPage } from '../utils';
-import { setLoginInfo } from './requireLogin';
+import { setLoginInfo, clearLoginInfo } from './requireLogin';
 
 const isEmpty = obj => {
   return (obj && Object.keys(obj).length == 0) || !obj.hasOwnProperty('id') || obj['id'] == 0;
@@ -37,13 +37,16 @@ export default {
   methods: {
     async $login(token, expired_at) {
       if (!token) {
-        console.error('请指定token和过期时间');
+        console.error('请指定token');
         return;
       }
-      setLoginInfo(token, expired_at || new Date().getTime() + 1000 * 60 * 60 * 24); // 默认一天后过期
+      if (!expired_at) {
+        expired_at = new Date().getTime() + 1000 * 60 * 60 * 24;
+      }
+      setLoginInfo(token, expired_at); // 默认一天后过期
     },
     async $logout() {
-      setLoginInfo(null, null);
+      clearLoginInfo();
       uni.$m.router.to('/pages/Login/Login');
     }
   }

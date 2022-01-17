@@ -18,7 +18,11 @@ export default Vue.extend({
   },
   mixins: [requireLogin, requireUpload],
   async mounted() {
-    console.log(await this.getUserInfo());
+    try {
+      await this.getUserInfo();
+    } catch (e) {
+      this.$router.to('/pages/Login/Login');
+    }
   },
   methods: {
     async onClearStorage() {
