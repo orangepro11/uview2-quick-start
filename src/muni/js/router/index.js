@@ -1,4 +1,4 @@
-const { addSlanting, getPrevPage, getVMByPagesRouter } = require('./utils');
+const { addSlanting, getPrevPage, getVMByPagesRouter, getParamsByUrl } = require('./utils');
 import { TabBarPages, LoginPage } from './config';
 
 class CustomRouter {
@@ -97,6 +97,13 @@ class CustomRouter {
   getCurrentPageUrl = () => {
     return this.historyPages[this.historyPages.length - 1];
   };
+
+  // #ifdef H5
+  query = () => {
+    let url = location.href;
+    return getParamsByUrl(url) || {};
+  };
+  // #endif
 }
 
 const router = new CustomRouter(TabBarPages, LoginPage); // 默认导出一个初始化的实例

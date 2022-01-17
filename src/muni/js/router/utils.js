@@ -31,3 +31,18 @@ export function getVMByPagesRouter(url) {
     }
   });
 }
+
+export function getParamsByUrl(url) {
+  const params = {};
+  const arr = url.split('?');
+  if (arr.length <= 1) {
+    return params;
+  }
+  const query = arr[1];
+  const queryArr = query.split('&');
+  queryArr.forEach(item => {
+    const keyValue = item.split('=');
+    params[keyValue[0]] = keyValue[1];
+  });
+  return params;
+}
