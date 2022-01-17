@@ -23,25 +23,25 @@ declare module 'vue/types/vue' {
   }
 }
 
-declare module "vue/types/options" {
-  interface ComponentOptions<V extends Vue> {
-    events?: Record<string, string | ((this: V, ...args: any[]) => void)>
-    $m: any;
-    $router: any;
-  }
-}
+// declare module "vue/types/options" {
+//   interface ComponentOptions<V extends Vue> {
+//     events?: Record<string, string | ((this: V, ...args: any[]) => void)>
+//     $m: any;
+//     $router: any;
+//   }
+// }
 
-declare module '@types/uni-app/lib/uni' {
-  interface Uni {
-    $u: any;
-    $m: any;
-  }
-}
+// declare module '@types/uni-app/lib/uni' {
+//   interface Uni {
+//     $u: any;
+//     $m: any;
+//   }
+// }
 
-declare class Uni {
-  $u: any;
-  $m: any;
-}
+// declare class Uni {
+//   $u: any;
+//   $m: any;
+// }
 
 declare module 'App' {
   import App from './App.vue';

@@ -26,6 +26,7 @@ export default Vue.extend({
       await uni.$m.alert('确定要清空所有缓存吗?');
       // @ts-ignore
       uni.$m.storage.clear(); // 清除本地缓存
+      // @ts-ignore
       this.$logout(); // 可选，让用户重新登录
     }
   }
