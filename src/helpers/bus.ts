@@ -57,8 +57,90 @@ const bus = new Vue({
   }
 });
 
-function install(Vue: any) {
+interface IEventConfig {
+  // 回调，若是字符串从methods中取
+  handler: Function | string
+  // 已经运行的次数
+  runTimes: number
+  // 最大运行次数
+  maxRunTimes: number
+}
+
+const registerTrigger = <T extends Vue>(Vue: T): void => {
+  /** 自定义events的合并规则 **/
+  Vue.config.optionMergeStrategies.events = function (parent, child) {
+    const events = Object.assign({}, parent)
+    for (const key in child) {
+      const [name, times] = key.split(':')
+      if (!events[name]) {
+        events[name] = []
+      }
+      events[name].push({
+        handler: child[key],
+        runTimes: 0,
+        maxRunTimes: times
+          ? times === 'once'
+            ? 1
+            : parseInt(times)
+          : NaN,
+      })
+    }
+    return events
+  }
+
+  Vue.mixin({
+    created() {
+      const { events, methods } = this.$options
+
+      /** 若不存在events则不需要进行事件的注册操作 **/
+      if (!events || !Object.keys(events).length) {
+        return
+      }
+
+      /** 暂存当前组件的events，便于组件销毁时解绑 **/
+      this.$eventbus = {}
+
+      for (const key in events) {
+        this.$eventbus[key] = args => {
+          events[key].forEach((handlerConfig: IEventConfig) => {
+            const { handler, runTimes, maxRunTimes } = handlerConfig
+            const originalCb = typeof handler === 'string'  ? methods[handler] : handler
+            let cb = originalCb
+
+            // 若限制了事件的最大执行次数
+            if (!isNaN(maxRunTimes)) {
+              cb = function(...args) {
+                if (runTimes < maxRunTimes) {
+                  handlerConfig.runTimes++
+                  originalCb.call(this, ...args)
+                }
+              }
+            }
+
+            cb.call(this, ...args)
+          })
+        }
+        bus.$on(key, this.$eventbus[key])
+      }
+    },
+    beforeDestroy() {
+      if (this.$eventbus) {
+        // 解绑当前组件注册的事件
+        for (const key in this.$eventbus) {
+          bus.$off(key, this.$eventbus[key])
+        }
+      }
+    }
+  })
+
+  Vue.prototype.$Trigger = (key: string, ...args: any[]) => {
+    bus.$emit(key, args)
+  }
+}
+
+function install<T extends Vue>(Vue: T) {
   Vue.prototype.$bus = bus;
+  registerTrigger(Vue)
 }
 
 export { bus };

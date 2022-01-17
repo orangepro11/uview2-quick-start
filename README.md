@@ -309,9 +309,50 @@ export default { install };
 
 
 
-使用方法：通过this.$bus.on监听事件，通过this,$bus.emit触发事件，通过this,$bus.off退订事件。
+使用方法一：通过this.$bus.on监听事件，通过this,$bus.emit触发事件，通过this,$bus.off退订事件。
+<br/>
+使用方法二：在增加events配置项后，便可通过this.$Trigger触发事件，如下示例。
 
-
+```vue
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  data() {
+    return {
+      name: '我是测试组件'
+    }
+  },
+  events: {
+    aa() {
+      console.log('我是aa', this.name)
+    },
+    'bb:once'(a, b, c) {
+      console.log('我是仅会执行1次的bb', a, b, c)
+    },
+    'cc:2'() {
+      console.log('我是最多会执行2次的cc')
+    },
+    dd: 'fn'
+  },
+  methods: {
+    fn() {
+      console.log('我是dd事件触发的fn')
+    }
+  },
+  created() {
+    // events与$Trigger通常是跨组件层级的，这里为便于展示写在了同一组件内
+    this.$Trigger('aa')
+    this.$Trigger('bb', 1, 2, 3)
+    this.$Trigger('bb', 1, 2, 3)
+    this.$Trigger('cc')
+    this.$Trigger('cc')
+    this.$Trigger('cc')
+    this.$Trigger('cc')
+    this.$Trigger('dd')
+  }
+})
+</script>
+```
 
 ## 友好提示
 
