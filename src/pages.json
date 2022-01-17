@@ -28,7 +28,7 @@
       }
     },
     {
-      "path": "pages/Login/login",
+      "path": "pages/Login/Login",
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "custom",
@@ -60,12 +60,6 @@
         "iconPath": "static/tabbar/home.png",
         "selectedIconPath": "static/tabbar/home-active.png",
         "text": "主页"
-      },
-      {
-        "pagePath": "pages/TabBar/cart/cart",
-        "iconPath": "static/tabbar/cart.png",
-        "selectedIconPath": "static/tabbar/cart-active.png",
-        "text": "购物车"
       },
       {
         "pagePath": "pages/TabBar/my/my",

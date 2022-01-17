@@ -3,13 +3,15 @@
  * @param {*} key 缓存中的key值
  * @param {*} value 缓存中的value值
  */
-export function set(key, value) {
+export function setStorage(key, value) {
   return new Promise((resolve, reject) => {
     uni.setStorage({
       key,
       data: value,
       success: resolve,
-      fail: reject
+      fail: () => {
+        resolve(undefined)
+      }
     });
   });
 }
@@ -18,33 +20,33 @@ export function set(key, value) {
  * 异步从缓存中读值
  * @param {*} key 缓存中的key值
  */
-export function get(key) {
+export function getStorage(key) {
   return new Promise((resolve, reject) => {
     uni.getStorage({
       key,
       success: ({ data }) => {
         resolve(data);
       },
-      fail: reject
+      fail: () => {
+        resolve(undefined);
+      }
     });
   });
 }
 
-export function remove(key) {
+export function removeStorage(key) {
   return new Promise((resolve, reject) => {
     uni.removeStorage({
       key,
       success: resolve,
-      fail: reject
     });
   });
 }
 
-export function clear() {
+export function clearStorage() {
   return new Promise((resolve, reject) => {
     uni.clearStorage({
       success: resolve,
-      fail: reject
     });
   });
 }

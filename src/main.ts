@@ -1,9 +1,10 @@
 import Vue from 'vue';
+// @ts-ignore
 import App from './App.vue';
 import uView from '@/uview-ui';
 Vue.use(uView);
 
-import muni from '@/js_sdk/muni';
+import muni from '@/muni/js/';
 Vue.use(muni);
 
 Vue.config.productionTip = false;

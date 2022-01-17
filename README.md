@@ -114,9 +114,6 @@ fly.interceptors.request.use(request => {
   const token = getUserToken(); // 这里获取你的token
   if (token) {
     request.headers['Authorization'] = token;
-  } else {
-    // 让用户去登录
-    toLoginPage();
   }
   return request;
 });
@@ -138,14 +135,6 @@ fly.interceptors.response.use(
   },
   err => {
     console.log(err);
-    if (err.message == '未授权') {
-      // @ts-ignore
-      uni.showModal({
-        title: '出错了',
-        content: '登录失效，请重新登录'
-      });
-      uni.removeStorageSync('token');
-      toLoginPage();
     } else {
       uni.showModal({
         title: '出错了',

@@ -26,6 +26,8 @@ declare module 'vue/types/vue' {
 declare module "vue/types/options" {
   interface ComponentOptions<V extends Vue> {
     events?: Record<string, string | ((this: V, ...args: any[]) => void)>
+    $m: any;
+    $router: any;
   }
 }
 

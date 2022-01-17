@@ -3,6 +3,7 @@
     <i-navbar title="主页" :is-back="false"></i-navbar>
     <!-- <u-calendar monthNum="12" mode="range" :show="true" :minDate="minDate" :maxDate="maxDate" :defaultDate="defaultDate"></u-calendar> -->
     这是主页
+    <u-button text="点我跳转" @click="$router.to('/pages/TabBar/my/my')"></u-button>
   </div>
 </template>
 
@@ -34,7 +35,9 @@ export default Vue.extend({
       ]
     };
   },
-  async mounted() {},
+  async mounted() {
+    console.log(this.$router);
+  },
   methods: {}
 });
 </script>
