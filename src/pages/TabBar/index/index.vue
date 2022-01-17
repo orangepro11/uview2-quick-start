@@ -17,8 +17,7 @@ export default Vue.extend({
       defaultDate: ['2018-08-01'],
       test: [
         {
-          sort: 1,
-          color: 'red'
+          sort: 1
         },
         {
           sort: 3,
@@ -36,7 +35,7 @@ export default Vue.extend({
     };
   },
   async mounted() {
-    console.log(this.$router);
+    console.log(this.$m);
   },
   methods: {}
 });

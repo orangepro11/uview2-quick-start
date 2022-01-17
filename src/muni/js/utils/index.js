@@ -22,7 +22,7 @@ export function cut(str, len) {
  * @param str 要匹配的字符串
  * @example match(/\d+/g)('123abc') => ['123']
  */
-export const match = curry(function (reg, str) {
+export const match = curry(function(reg, str) {
   return str.match(reg);
 });
 
@@ -36,8 +36,6 @@ export function uuid() {
     return v.toString(16);
   });
 }
-
-
 
 export function getPage() {
   const pages = getCurrentPages();
@@ -64,43 +62,47 @@ export function alert(content, showCancel) {
 }
 
 export function typeOf(obj) {
-  return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
+  return Object.prototype.toString
+    .call(obj)
+    .slice(8, -1)
+    .toLowerCase();
 }
 
 // 在fn函数执行前执行beforeFn
-export const before = curry(function (fn, beforeFn) {
-  return function () {
+export const before = curry(function(fn, beforeFn) {
+  return function() {
     const flag = beforeFn.apply(this, arguments); // 是否继续往下执行
     if (flag === false) {
       return;
     }
     return fn.apply(this, arguments);
-  }
-})
+  };
+});
 
 // 在fn函数执行后执行afterFn
 export function after(fn, afterFn) {
-  return function () {
+  return function() {
     const result = fn.apply(this, arguments);
     afterFn.apply(this, arguments);
     return result;
-  }
+  };
 }
-
 
 // 接受不定数量的参数，依次执行
 export function compose(...fns) {
-  return function (...args) {
+  return function(...args) {
     return fns.reduce((prev, curr) => {
       return curr(prev);
     }, args);
-  }
+  };
 }
 
 export function objectToQuery(obj = {}) {
-  return Object.keys(obj).map(key => {
-    return `${key}=${obj[key]}`;
-  }).join('&');
+  return Object.keys(obj)
+    .map(key => {
+      return `${key}=${obj[key]}`;
+    })
+    .join('&');
 }
 
 export function open(url, params = {}) {
@@ -119,6 +121,22 @@ export function open(url, params = {}) {
         }
         return reject();
       }
-    })
+    });
   });
 }
+
+export const deepMergeObjects = (...objs) => {
+  const result = {};
+  objs.forEach(obj => {
+    if (obj) {
+      Object.keys(obj).forEach(key => {
+        if (typeof obj[key] === 'object') {
+          result[key] = deepMergeObjects(result[key], obj[key]);
+        } else {
+          result[key] = obj[key];
+        }
+      });
+    }
+  });
+  return result;
+};
