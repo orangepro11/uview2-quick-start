@@ -12,9 +12,7 @@ const bus = new Vue({
    * @returns
    */
   data() {
-    return {
-      
-    };
+    return {};
   },
   methods: {
     /**
@@ -52,95 +50,92 @@ const bus = new Vue({
         });
         eventMap.delete(event);
       }
-    },
-
+    }
   }
 });
 
 interface IEventConfig {
   // 回调，若是字符串从methods中取
-  handler: Function | string
+  handler: Function | string;
   // 已经运行的次数
-  runTimes: number
+  runTimes: number;
   // 最大运行次数
-  maxRunTimes: number
+  maxRunTimes: number;
 }
 
-const registerTrigger = <T extends Vue>(Vue: T): void => {
+const registerTrigger = (Vue: any) => {
   /** 自定义events的合并规则 **/
-  Vue.config.optionMergeStrategies.events = function (parent, child) {
-    const events = Object.assign({}, parent)
+  // @ts-ignore
+  Vue.config.optionMergeStrategies.events = function(parent, child) {
+    const events = Object.assign({}, parent);
     for (const key in child) {
-      const [name, times] = key.split(':')
+      const [name, times] = key.split(':');
       if (!events[name]) {
-        events[name] = []
+        events[name] = [];
       }
       events[name].push({
         handler: child[key],
         runTimes: 0,
-        maxRunTimes: times
-          ? times === 'once'
-            ? 1
-            : parseInt(times)
-          : NaN,
-      })
+        maxRunTimes: times ? (times === 'once' ? 1 : parseInt(times)) : NaN
+      });
     }
-    return events
-  }
+    return events;
+  };
 
   Vue.mixin({
     created() {
-      const { events, methods } = this.$options
+      const { events, methods } = this.$options;
 
       /** 若不存在events则不需要进行事件的注册操作 **/
       if (!events || !Object.keys(events).length) {
-        return
+        return;
       }
 
       /** 暂存当前组件的events，便于组件销毁时解绑 **/
-      this.$eventbus = {}
+      this.$eventbus = {};
 
       for (const key in events) {
         this.$eventbus[key] = args => {
           events[key].forEach((handlerConfig: IEventConfig) => {
-            const { handler, runTimes, maxRunTimes } = handlerConfig
-            const originalCb = typeof handler === 'string'  ? methods[handler] : handler
-            let cb = originalCb
+            const { handler, runTimes, maxRunTimes } = handlerConfig;
+            const originalCb = typeof handler === 'string' ? methods[handler] : handler;
+            let cb = originalCb;
 
             // 若限制了事件的最大执行次数
             if (!isNaN(maxRunTimes)) {
               cb = function(...args) {
                 if (runTimes < maxRunTimes) {
-                  handlerConfig.runTimes++
-                  originalCb.call(this, ...args)
+                  handlerConfig.runTimes++;
+                  originalCb.call(this, ...args);
                 }
-              }
+              };
             }
 
-            cb.call(this, ...args)
-          })
-        }
-        bus.$on(key, this.$eventbus[key])
+            cb.call(this, ...args);
+          });
+        };
+        bus.$on(key, this.$eventbus[key]);
       }
     },
     beforeDestroy() {
       if (this.$eventbus) {
         // 解绑当前组件注册的事件
         for (const key in this.$eventbus) {
-          bus.$off(key, this.$eventbus[key])
+          bus.$off(key, this.$eventbus[key]);
         }
       }
     }
-  })
-
+  });
+  // @ts-ignore
   Vue.prototype.$Trigger = (key: string, ...args: any[]) => {
-    bus.$emit(key, args)
-  }
-}
+    bus.$emit(key, args);
+  };
+};
 
-function install<T extends Vue>(Vue: T) {
+function install(Vue: any) {
+  // @ts-ignore
   Vue.prototype.$bus = bus;
-  registerTrigger(Vue)
+  registerTrigger(Vue);
 }
 
 export { bus };
