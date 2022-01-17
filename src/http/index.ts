@@ -1,8 +1,10 @@
 import { getUserToken, toLoginPage } from '@/helpers/hooks';
-import fly from 'flyio';
+import Fly from 'flyio/dist/npm/fly';
 
 import baseURL from './baseURL';
 declare const uni: any;
+
+const fly = new Fly();
 
 fly.interceptors.request.use(request => {
   request['baseURL'] = baseURL;
