@@ -20,6 +20,8 @@ declare module 'vue/types/vue' {
     $bus: any;
     mescrollInit: any;
     $Trigger: (name: string, ...args: any[]) => void;
+    $router: any;
+    $m: any;
   }
 }
 
@@ -31,17 +33,17 @@ declare module 'vue/types/vue' {
 //   }
 // }
 
-// declare module '@types/uni-app/lib/uni' {
-//   interface Uni {
-//     $u: any;
-//     $m: any;
-//   }
-// }
+declare module '@types/uni-app/lib/uni' {
+  interface Uni {
+    $u: any;
+    $m: any;
+  }
+}
 
-// declare class Uni {
-//   $u: any;
-//   $m: any;
-// }
+declare class Uni {
+  $u: any;
+  $m: any;
+}
 
 declare module 'App' {
   import App from './App.vue';

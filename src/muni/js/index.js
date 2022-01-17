@@ -10,16 +10,18 @@ import mixins from './mixins';
 const deepMergeObjects = (...objs) => {
   const result = {};
   objs.forEach(obj => {
-    Object.keys(obj).forEach(key => {
-      if (typeof obj[key] === 'object') {
-        result[key] = deepMergeObjects(result[key], obj[key]);
-      } else {
-        result[key] = obj[key];
-      }
-    });
+    if (obj) {
+      Object.keys(obj).forEach(key => {
+        if (typeof obj[key] === 'object') {
+          result[key] = deepMergeObjects(result[key], obj[key]);
+        } else {
+          result[key] = obj[key];
+        }
+      });
+    }
   });
   return result;
-}
+};
 
 function pay(payload) {
   const { platform } = uni.$u;
@@ -31,23 +33,13 @@ function pay(payload) {
   }
 }
 
-const muni = deepMergeObjects(
-  storage,
-  file,
-  pay,
-  utils
-);
+const muni = deepMergeObjects(storage, file, utils, { router }, { pay }, { callPrevMethod: router.callPrevMethod });
 
 // 挂载到uni上
 uni.$m = muni;
 
-console.log(uni.$m)
-
 export default {
   install(Vue) {
     Vue.mixin(mixins);
-    // #ifdef H5
-    Vue.prototype.$m = muni; // 仅在H5平台挂载，
-    // #endif
   }
 };

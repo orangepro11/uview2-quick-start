@@ -40,22 +40,19 @@ export default Vue.extend({
     /**
      * 登录方法
      */
-    handleLogin(): void {
+    async handleLogin(): Promise<void> {
       if (this.username == 'admin' && this.password == 'admin') {
-        this.$auth({
-          id: 1,
-          nickname: '不爱喝橙子汁'
-        });
-        this.$return(); // 这是封装在mixin的方法，可以直接返回上一页
+        await this.$login('user_token');
+        // #ifdef H5
+        await this.$toast.success('登录成功');
+        // #endif
+        this.$router.toName('index');
       }
     }
   },
   computed: {
     buttonStyle(): string {
       // @ts-ignore
-      return uni.$m.jss.customButton;
-    },
-    firstInputStyle(): string {
       return `
         background: linear-gradient(90deg, #59c0ff, #1795ff);
         color: #fff;
@@ -67,6 +64,13 @@ export default Vue.extend({
         color: #ffffff;
         border-radius: 48rpx;
         margin-top: 48rpx;
+      `;
+    },
+    firstInputStyle(): string {
+      return `
+        eight: 76rpx;
+        background: rgba(132, 183, 255, 0.1);
+        border: 1rpx solid #83b5ff;
       `;
     },
     secondInputStyle(): string {

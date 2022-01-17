@@ -1,14 +1,13 @@
 import { mapGetters, mapActions } from 'vuex';
-import { getPage } from '../utils';
+import { deepMergeObjects, getPage } from '../utils';
+import { setLoginInfo, clearLoginInfo } from './requireLogin';
 
-const isEmpty = (obj) => {
-  return obj && Object.keys(obj).length == 0 || !obj.hasOwnProperty('id') || obj["id"] == 0;
-}
+const isEmpty = obj => {
+  return (obj && Object.keys(obj).length == 0) || !obj.hasOwnProperty('id') || obj['id'] == 0;
+};
 
 // 不需要授权的白名单
-const WhiteList = [
-  "pages/index/index",
-];
+const WhiteList = ['pages/index/index'];
 
 const VisitedPage = new Set();
 let currentPage;
@@ -18,49 +17,37 @@ export default {
   computed: {
     ...mapGetters('auth', ['UserInfo']), // 全局混入用户信息
     $m() {
-      // 选择性的混入$m对象，防止性能问题
-      return {
-        before: uni.$m.before,
-        after: uni.$m.after,
-        chain: uni.$m.compose
-      };
+      // 在H5平台完整混入
+      // #ifdef H5
+      return uni.$m;
+      // #endif
+
+      // 在小程序平台删除部分属性
+      // #ifdef MP-WEIXIN
+      return deepMergeObjects(uni.$m, {
+        uuid: undefined
+      });
+      // #endif
     },
     $router() {
-      return {
-        to: uni.$m.router.to
-      };
+      return uni.$m.router;
     }
   },
-  async created() {
-  },
+  async created() {},
   methods: {
-    ...mapActions('auth', ['setUserInfo', 'clearUserInfo']), // 全局混入
-    async $auth(payload) {
-      if (payload) {
-        uni.$m.storage.set('UserInfo', payload);
-        this.setUserInfo(payload);
+    async $login(token, expired_at) {
+      if (!token) {
+        console.error('请指定token');
+        return;
       }
-
-      let userInfo = this.UserInfo;
-      if (isEmpty(userInfo)) {
-        // 尝试从缓存中取
-        try {
-          userInfo = await uni.$m.storage.get('UserInfo');
-        } catch (e) {}
+      if (!expired_at) {
+        expired_at = new Date().getTime() + 1000 * 60 * 60 * 24;
       }
-      return !isEmpty(userInfo);
+      setLoginInfo(token, expired_at); // 默认一天后过期
     },
-    $return() {
-      console.log();
-    },
-    $logout() {
-      this.clearUserInfo(); // 清空用户信息
-      currentPage = ''; // 下次登录的时候去首页
-      currentPage = ''; // 下次登录的时候去首页 
-      uni.$u.route({
-        type: 'redirect',
-        url: LoginPage
-      }); // 去登录页
+    async $logout() {
+      clearLoginInfo();
+      uni.$m.router.to('/pages/Login/Login');
     }
   }
 };
