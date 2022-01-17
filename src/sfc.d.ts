@@ -20,6 +20,7 @@ declare module 'vue/types/vue' {
     $bus: any;
     mescrollInit: any;
     $m: any;
+    $router: any;
   }
 }
 
