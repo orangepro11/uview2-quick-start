@@ -1,5 +1,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import { deepMergeObjects, getPage } from '../utils';
+import { setLoginInfo } from './requireLogin';
 
 const isEmpty = obj => {
   return (obj && Object.keys(obj).length == 0) || !obj.hasOwnProperty('id') || obj['id'] == 0;
@@ -34,6 +35,16 @@ export default {
   },
   async created() {},
   methods: {
-    ...mapActions('auth', ['setUserInfo', 'clearUserInfo']) // 全局混入
+    async $login(token, expired_at) {
+      if (!token) {
+        console.error('请指定token和过期时间');
+        return;
+      }
+      setLoginInfo(token, expired_at || new Date().getTime() + 1000 * 60 * 60 * 24); // 默认一天后过期
+    },
+    async $logout() {
+      setLoginInfo(null, null);
+      uni.$m.router.to('/pages/Login/Login');
+    }
   }
 };

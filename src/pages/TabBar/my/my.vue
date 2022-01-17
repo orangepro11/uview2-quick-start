@@ -18,16 +18,15 @@ export default Vue.extend({
   },
   mixins: [requireLogin, requireUpload],
   async mounted() {
-    console.log(await this.getUserInfo())
+    console.log(await this.getUserInfo());
   },
   methods: {
     async onClearStorage() {
       // @ts-ignore
       await uni.$m.alert('确定要清空所有缓存吗?');
       // @ts-ignore
-      uni.$m.storage.clear(); // 清除本地缓存
-      // @ts-ignore
-      this.$logout(); // 可选，让用户重新登录
+      uni.$m.clearStorage();
+      this.$logout();
     }
   }
 });
