@@ -1,5 +1,6 @@
-const { addSlanting, getPrevPage, getVMByPagesRouter, getParamsByUrl } = require('./utils');
-import { TabBarPages, LoginPage } from './config';
+const { addSlanting, getPrevPage, getVMByPagesRouter, getParamsByUrl, addParamsToUrl } = require('./utils');
+import { TabBarPages, LoginPage, Pages } from '@/constantRouters';
+import { typeOf } from '../utils';
 
 class CustomRouter {
   TabBarPages = [];
@@ -27,15 +28,19 @@ class CustomRouter {
     return this.TabBarPages.indexOf(url) > -1;
   };
 
-  to = (targetURL, fn) => {
+  to = (targetURL, params, fn) => {
     // 如果fn返回false，则不跳转
+    if (fn && typeOf(fn) != 'function') {
+      console.error('$router.to的第三个参数必须是一个函数');
+      return;
+    }
     if (fn && fn() === false) {
       return;
     }
     let routerAPI = this.isTabBar(targetURL) ? uni.switchTab : uni.navigateTo;
     return new Promise((resolve, reject) => {
       routerAPI({
-        url: targetURL,
+        url: addParamsToUrl(targetURL),
         success: () => {
           this.historyPages.push(targetURL);
           resolve();
@@ -45,6 +50,14 @@ class CustomRouter {
         }
       });
     });
+  };
+
+  toName = async (name, params, fn) => {
+    const url = Pages.find(page => page.name == name)?.url || '';
+    if (!url) {
+      throw new Error('请在constantRouter.js中注册要通过名字跳转的路由');
+    }
+    return await this.to(addSlanting(url), params, fn);
   };
 
   redirect = targetURL => {
@@ -106,6 +119,9 @@ class CustomRouter {
   // #endif
 }
 
-const router = new CustomRouter(TabBarPages, LoginPage); // 默认导出一个初始化的实例
+const router = new CustomRouter(
+  TabBarPages.map(page => addSlanting(page)),
+  addSlanting(LoginPage)
+); // 默认导出一个初始化的实例
 
 export default router;

@@ -32,6 +32,26 @@ export function getVMByPagesRouter(url) {
   });
 }
 
+export function objectToQuery(obj) {
+  if (typeof obj !== 'object') {
+    return '';
+  }
+  return Object.keys(obj)
+    .map(key => {
+      return `${key}=${obj[key]}`;
+    })
+    .join('&');
+}
+
+export function addParamsToUrl(url, params) {
+  // 检查url是否已经携带参数
+  if (url.indexOf('?') > -1) {
+    return url + '&' + objectToQuery(params);
+  } else {
+    return url + '?' + objectToQuery(params);
+  }
+}
+
 export function getParamsByUrl(url) {
   const params = {};
   const arr = url.split('?');

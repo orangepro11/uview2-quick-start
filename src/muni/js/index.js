@@ -33,7 +33,7 @@ function pay(payload) {
   }
 }
 
-const muni = deepMergeObjects(storage, file, utils, { router }, { pay });
+const muni = deepMergeObjects(storage, file, utils, { router }, { pay }, { callPrevMethod: router.callPrevMethod });
 
 // 挂载到uni上
 uni.$m = muni;

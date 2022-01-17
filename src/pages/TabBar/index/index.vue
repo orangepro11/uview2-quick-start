@@ -2,7 +2,7 @@
   <div>
     <i-navbar title="主页" :is-back="false"></i-navbar>
     这是主页
-    <u-button text="点我跳转" @click="$router.to('/pages/TabBar/my/my')"></u-button>
+    <u-button text="点我跳转" @click="$router.toName('my')"></u-button>
   </div>
 </template>
 
