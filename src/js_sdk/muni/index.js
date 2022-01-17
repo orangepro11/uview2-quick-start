@@ -3,6 +3,7 @@ import * as utils from './utils';
 import * as file from './file';
 import * as wechat from './wechat';
 import * as jss from './jss';
+import router from './router';
 import mixins from './mixins';
 
 function pay(payload) {
@@ -20,7 +21,8 @@ const muni = uni.$u.deepMerge(
     storage,
     file,
     pay,
-    jss
+    jss,
+    router
   },
   utils
 );
