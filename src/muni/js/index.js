@@ -2,6 +2,8 @@ import * as storage from './storage';
 import * as utils from './utils';
 import * as file from './file';
 import * as wechat from './wechat';
+import * as jss from './jss';
+import router from './router';
 import mixins from './mixins';
 
 // 深度合并若干对象
