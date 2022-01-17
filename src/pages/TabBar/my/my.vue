@@ -9,12 +9,17 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import requireLogin from '@/muni/js/mixins/requireLogin';
+import requireUpload from '@/muni/js/mixins/requireUpload';
 
 export default Vue.extend({
   data() {
     return {};
   },
-  mounted() {},
+  mixins: [requireLogin, requireUpload],
+  async mounted() {
+    console.log(await this.getUserInfo())
+  },
   methods: {
     async onClearStorage() {
       // @ts-ignore

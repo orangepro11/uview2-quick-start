@@ -39,9 +39,13 @@ const muni = deepMergeObjects(
 // 挂载到uni上
 uni.$m = muni;
 
+console.log(uni.$m)
+
 export default {
   install(Vue) {
     Vue.mixin(mixins);
-    // Vue.prototype.$m = muni; // 不挂载防止出现性能问题
+    // #ifdef H5
+    Vue.prototype.$m = muni; // 仅在H5平台挂载，
+    // #endif
   }
 };

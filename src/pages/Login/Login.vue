@@ -57,9 +57,16 @@ export default Vue.extend({
     },
     firstInputStyle(): string {
       return `
-        height: 76rpx;
-        background: rgba(132, 183, 255, 0.1);
-        border: 1rpx solid #83b5ff;
+        background: linear-gradient(90deg, #59c0ff, #1795ff);
+        color: #fff;
+        display: grid;
+        place-content: center;
+        font-size: 34rpx;
+        font-family: SourceHanSansCN;
+        font-weight: 400;
+        color: #ffffff;
+        border-radius: 48rpx;
+        margin-top: 48rpx;
       `;
     },
     secondInputStyle(): string {

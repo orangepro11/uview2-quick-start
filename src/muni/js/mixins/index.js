@@ -27,17 +27,7 @@ export default {
     }
   },
   async created() {
-    let { route: page } = getPage();
-    if (!page || WhiteList.includes(page) || VisitedPage.has(page) || page == LoginPage) {
-      return;
-    } else {
-      currentPage = page;
-      if (!await this.$auth()) {
-        uni.$u.route(LoginPage);
-      } else {
-        VisitedPage.add(page);
-      }
-    }
+    
   },
   methods: {
     ...mapActions('auth', ['setUserInfo', 'clearUserInfo']), // 全局混入
