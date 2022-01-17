@@ -11,23 +11,23 @@ class CustomRouter {
     this.LoginPage = LoginPage;
   }
 
-  addTabBar(url) {
+  addTabBar = url => {
     // 如果TabBarPages里已经存在则直接返回
     if (this.TabBarPages.indexOf(url) > -1) {
       return;
     }
     this.TabBarPages.push(addSlanting(url));
-  }
+  };
 
-  setLoginPage(url) {
+  setLoginPage = url => {
     this.LoginPage = addSlanting(url);
-  }
+  };
 
-  isTabBar(url) {
+  isTabBar = url => {
     return this.TabBarPages.indexOf(url) > -1;
-  }
+  };
 
-  to(targetURL, fn) {
+  to = (targetURL, fn) => {
     // 如果fn返回false，则不跳转
     if (fn && fn() === false) {
       return;
@@ -45,9 +45,9 @@ class CustomRouter {
         }
       });
     });
-  }
+  };
 
-  redirect(targetURL) {
+  redirect = targetURL => {
     let routerAPI = this.isTabBar(targetURL) ? uni.switchTab : uni.redirectTo;
     return new Promise((resolve, reject) => {
       routerAPI({
@@ -62,9 +62,9 @@ class CustomRouter {
         }
       });
     });
-  }
+  };
 
-  back(delta) {
+  back = delta => {
     uni.navigateBack({
       delta,
       success: () => {
@@ -72,31 +72,33 @@ class CustomRouter {
       },
       fail: e => {}
     });
-  }
+  };
 
   /**
    * 调用上一个页面实例的方法
    * @param {string} methodName 方法名
    * @param  {...any} args 方法接受的参数
    */
-  callPrevMethod(methodName, ...args) {
+  callPrevMethod = (methodName, ...args) => {
     const prevPage = getPrevPage();
     if (prevPage) {
       return prevPage[methodName](...args);
     }
-  }
+  };
 
-  getPage(url) {
+  getPage = url => {
     return getVMByPagesRouter(url);
-  }
+  };
 
-  getCurrentPage() {
+  getCurrentPage = () => {
     return getVMByPagesRouter(this.getCurrentPageUrl());
-  }
+  };
 
-  getCurrentPageUrl() {
+  getCurrentPageUrl = () => {
     return this.historyPages[this.historyPages.length - 1];
-  }
+  };
 }
 
-export default new CustomRouter(TabBarPages, LoginPage); // 默认导出一个初始化的实例
+const router = new CustomRouter(TabBarPages, LoginPage); // 默认导出一个初始化的实例
+
+export default router;
