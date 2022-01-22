@@ -17,21 +17,20 @@ declare module 'vue/types/vue' {
   // 3. 声明为 Vue 补充的东西
   interface Vue {
     $u: any;
-    $bus: any;
+    $bus: InstanceType<typeof Vue>;
     mescrollInit: any;
+    $eventbus: Record<string, Function>;
     $Trigger: (name: string, ...args: any[]) => void;
     $router: any;
     $m: any;
   }
 }
 
-// declare module 'vue/types/options' {
-//   interface ComponentOptions<V extends Vue> {
-//     events?: Record<string, string | ((this: V, ...args: any[]) => void)>;
-//     $m: any;
-//     $router: any;
-//   }
-// }
+declare module 'vue/types/options' {
+  interface ComponentOptions<V extends Vue> {
+    events?: Record<string, string | ((this: V, ...args: any[]) => void)>;
+  }
+}
 
 declare module '@types/uni-app/lib/uni' {
   interface Uni {
