@@ -13,7 +13,7 @@ import store from './store';
 Vue.use(store);
 // 挂载总线实例
 // 通过this.$bus访问
-import Bus from '@/helpers/bus';
+import Bus, { bus } from '@/helpers/bus';
 Vue.use(Bus);
 
 // 挂载toast友好提示实例
