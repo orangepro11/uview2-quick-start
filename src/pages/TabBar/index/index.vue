@@ -2,7 +2,7 @@
   <div>
     <i-navbar title="主页" :is-back="false"></i-navbar>
     这是主页
-    <u-button text="点我跳转" @click="$router.toName('my')"></u-button>
+    <button @click="$u.throttle(() => onClick(1), 5000)">节流触发</button>
   </div>
 </template>
 
@@ -15,7 +15,11 @@ export default Vue.extend({
   async mounted() {
     console.log(this.$m);
   },
-  methods: {}
+  methods: {
+    onClick(arg1) {
+      console.log(arg1);
+    }
+  }
 });
 </script>
 
