@@ -1,7 +1,8 @@
 const path = require('path');
 
 module.exports = {
-  chainWebpack: config => {
+  lintOnSave: process.env.NODE_ENV !== 'production',
+  chainWebpack: (config) => {
     config.module
       .rule('pug')
       .test(/\.pug$/)
@@ -12,5 +13,5 @@ module.exports = {
     config.resolve.alias.set('@', path.resolve(__dirname, 'src'));
     config.resolve.alias.set('@js', path.resolve(__dirname, 'src/js_sdk'));
   },
-  transpileDependencies: ['uview-ui']
+  transpileDependencies: ['uview-ui'],
 };

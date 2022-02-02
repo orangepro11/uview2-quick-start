@@ -13,16 +13,16 @@ import auth from './modules/auth';
 export const store = new Vuex.Store({
   modules: {
     tabs,
-    auth
+    auth,
   },
   strict: debug,
   // #ifdef H5
-  plugins: debug ? [createLogger()] : []
+  plugins: debug ? [createLogger()] : [],
   // #endif
 });
 
 export default {
   install(Vue) {
     Vue.prototype.$store = store;
-  }
+  },
 };

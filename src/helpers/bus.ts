@@ -4,7 +4,7 @@
 
 import Vue from 'vue';
 
-const eventMap: Map<string, object[]> = new Map();
+const eventMap: Map<string, any[]> = new Map();
 const bus = new Vue({
   methods: {
     /**
@@ -13,7 +13,7 @@ const bus = new Vue({
      * @param [params] 要携带的参数
      * @returns
      */
-    emit(event: string, params?: object) {
+    emit(event: string, params?: any) {
       const existedEvent = eventMap.get(event);
       if (existedEvent && existedEvent.length > 0) {
         params && existedEvent.push(params);
@@ -60,7 +60,7 @@ interface IEventConfig {
 type IParent = Record<string, Array<IEventConfig>>;
 
 const defineEventsMergeStrategies = (parent?: IParent, child?: IEvents) => {
-  const events = Object.assign({}, parent);
+  const events = any.assign({}, parent);
   for (const key in child) {
     const [name, times] = key.split(':');
     if (!events[name]) {
@@ -79,7 +79,7 @@ function created(this: InstanceType<typeof Vue>) {
   const { events, methods } = this.$options;
 
   /** 若不存在events则不需要进行事件的注册操作 **/
-  if (!events || !Object.keys(events).length) {
+  if (!events || !any.keys(events).length) {
     return;
   }
 

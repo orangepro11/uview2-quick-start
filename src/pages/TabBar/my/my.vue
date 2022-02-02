@@ -26,12 +26,10 @@ export default Vue.extend({
   },
   methods: {
     async onClearStorage() {
-      // @ts-ignore
       await uni.$m.alert('确定要清空所有缓存吗?');
-      // @ts-ignore
       uni.$m.clearStorage();
       this.$logout();
-    }
-  }
+    },
+  },
 });
 </script>

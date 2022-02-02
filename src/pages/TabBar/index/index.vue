@@ -15,7 +15,7 @@ export default Vue.extend({
   async mounted() {
     console.log(this.$m);
   },
-  methods: {}
+  methods: {},
 });
 </script>
 
