@@ -65,8 +65,7 @@ export function post(url: string, body: any, query?: any): Promise<any> {
   if (query) {
     url +=
       '?' +
-      any
-        .keys(query)
+      Object.keys(query)
         .map((key) => key + '=' + encodeURIComponent(query[key]))
         .join('&');
   }

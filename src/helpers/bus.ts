@@ -60,7 +60,7 @@ interface IEventConfig {
 type IParent = Record<string, Array<IEventConfig>>;
 
 const defineEventsMergeStrategies = (parent?: IParent, child?: IEvents) => {
-  const events = any.assign({}, parent);
+  const events = Object.assign({}, parent);
   for (const key in child) {
     const [name, times] = key.split(':');
     if (!events[name]) {
@@ -79,7 +79,7 @@ function created(this: InstanceType<typeof Vue>) {
   const { events, methods } = this.$options;
 
   /** 若不存在events则不需要进行事件的注册操作 **/
-  if (!events || !any.keys(events).length) {
+  if (!events || !Object.keys(events).length) {
     return;
   }
 
