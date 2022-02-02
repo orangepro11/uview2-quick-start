@@ -61,7 +61,7 @@ export function get(url: string, query?: any): Promise<any> {
 // 方便以函数的形式调用post方法
 // 第三个参数是get参数
 export function post(url: string, body: any, query?: any): Promise<any> {
-  // convert query any to string and add to url
+  // convert query object to string and add to url
   if (query) {
     url +=
       '?' +
