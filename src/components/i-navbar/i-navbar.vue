@@ -14,22 +14,22 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     isBack: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   methods: {
     onLeftClick() {
       this.isBack && this.$emit('back');
-    }
+    },
   },
   computed: {
     bgColor() {
       return '#fff';
-    }
-  }
+    },
+  },
 };
 </script>

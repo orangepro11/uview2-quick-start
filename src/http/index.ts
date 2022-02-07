@@ -4,7 +4,7 @@ import fly from 'flyio';
 import baseURL from './baseURL';
 declare const uni: any;
 
-fly.interceptors.request.use(request => {
+fly.interceptors.request.use((request) => {
   request['baseURL'] = baseURL;
   request.headers['Accept'] = 'application/json; text/plain; charset=utf-8';
   request.headers['Content-Type'] = 'application/json; charset=utf-8';
@@ -20,7 +20,7 @@ fly.interceptors.request.use(request => {
 
 //添加响应拦截器，响应拦截器会在then/catch处理之前执行
 fly.interceptors.response.use(
-  response => {
+  (response) => {
     const data = response.data;
     if (!data) {
       return Promise.reject('Internal Server Error');
@@ -33,20 +33,19 @@ fly.interceptors.response.use(
     }
     return data.data;
   },
-  err => {
+  (err) => {
     console.log(err);
     if (err.message == '未授权') {
-      // @ts-ignore
       uni.showModal({
         title: '出错了',
-        content: '登录失效，请重新登录'
+        content: '登录失效，请重新登录',
       });
       uni.removeStorageSync('token');
       toLoginPage();
     } else {
       uni.showModal({
         title: '出错了',
-        content: '网络请求异常：' + err.message
+        content: '网络请求异常：' + err.message,
       });
     }
   }
@@ -55,7 +54,7 @@ fly.interceptors.response.use(
 export default fly;
 
 // 方便以函数的形式调用get方法
-export function get(url: string, query?: object): Promise<any> {
+export function get(url: string, query?: any): Promise<any> {
   return fly.get(url, query);
 }
 
@@ -67,7 +66,7 @@ export function post(url: string, body: any, query?: any): Promise<any> {
     url +=
       '?' +
       Object.keys(query)
-        .map(key => key + '=' + encodeURIComponent(query[key]))
+        .map((key) => key + '=' + encodeURIComponent(query[key]))
         .join('&');
   }
   return fly.post(url, body);

@@ -19,19 +19,17 @@ export default Vue.extend({
   mixins: [requireLogin, requireUpload],
   async mounted() {
     try {
-      await this.getUserInfo();
+      await this['getUserInfo']();
     } catch (e) {
       this.$router.to('/pages/Login/Login');
     }
   },
   methods: {
     async onClearStorage() {
-      // @ts-ignore
-      await uni.$m.alert('确定要清空所有缓存吗?');
-      // @ts-ignore
-      uni.$m.clearStorage();
-      this.$logout();
-    }
-  }
+      await uni['$m'].alert('确定要清空所有缓存吗?');
+      uni['$m'].clearStorage();
+      this['$logout']();
+    },
+  },
 });
 </script>

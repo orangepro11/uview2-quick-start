@@ -4,7 +4,7 @@ export default {
   setUserInfo({ commit }, UserInfo: any) {
     commit(types.SET_USER_INFO, UserInfo);
   },
-  clearUserInfo({commit}) {
+  clearUserInfo({ commit }) {
     commit(types.CLEAR_USER_INFO);
-  }
+  },
 };

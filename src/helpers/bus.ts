@@ -4,7 +4,7 @@
 
 import Vue from 'vue';
 
-const eventMap: Map<string, object[]> = new Map();
+const eventMap: Map<string, any[]> = new Map();
 const bus = new Vue({
   methods: {
     /**
@@ -13,7 +13,7 @@ const bus = new Vue({
      * @param [params] 要携带的参数
      * @returns
      */
-    emit(event: string, params?: object) {
+    emit(event: string, params?: any) {
       const existedEvent = eventMap.get(event);
       if (existedEvent && existedEvent.length > 0) {
         params && existedEvent.push(params);

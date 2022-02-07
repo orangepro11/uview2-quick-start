@@ -6,12 +6,10 @@ export default Vue.extend({
   onLaunch(options) {
     if (process.env.NODE_ENV == 'development') {
       uni.redirectTo({
-        url: '/pages/index/index'
+        url: '/pages/index/index',
       });
     }
   },
-  onShow() {},
-  onHide() {}
 });
 </script>
 

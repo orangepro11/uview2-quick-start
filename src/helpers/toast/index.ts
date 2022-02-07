@@ -5,7 +5,7 @@ function createToast(options?: any) {
   const Toast = Vue.extend(IToast);
   const instance = new Toast({
     el: document.createElement('div'),
-    data: options
+    data: options,
   });
   document.body.appendChild(instance.$el);
   return instance;
