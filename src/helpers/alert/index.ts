@@ -2,7 +2,6 @@ import Vue from 'vue';
 
 export function alert(content: any, showCancel?: boolean): Promise<string> {
   return new Promise((resolve, reject) => {
-    // @ts-ignore
     uni.showModal({
       title: '温馨提示',
       content,
@@ -12,7 +11,7 @@ export function alert(content: any, showCancel?: boolean): Promise<string> {
       },
       fail: () => {
         reject('error');
-      }
+      },
     });
   });
 }

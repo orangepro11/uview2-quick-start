@@ -30,10 +30,9 @@ export default Vue.extend({
   components: {},
   data() {
     return {
-      // @ts-ignore
-      isWechat: uni.$u.platform == 'weixin',
+      isWechat: uni['$u'].platform == 'weixin',
       username: '',
-      password: ''
+      password: '',
     };
   },
   methods: {
@@ -48,11 +47,10 @@ export default Vue.extend({
         // #endif
         this.$router.toName('index');
       }
-    }
+    },
   },
   computed: {
     buttonStyle(): string {
-      // @ts-ignore
       return `
         background: linear-gradient(90deg, #59c0ff, #1795ff);
         color: #fff;
@@ -80,9 +78,8 @@ export default Vue.extend({
         border: 1rpx solid #83b5ff;
         margin-top: 45rpx;
       `;
-    }
+    },
   },
-  mounted() {}
 });
 </script>
 

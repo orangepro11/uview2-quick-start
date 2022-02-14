@@ -6,5 +6,5 @@ export default {
   },
   [types.CLEAR_USER_INFO](state) {
     state.UserInfo = {};
-  }
+  },
 };

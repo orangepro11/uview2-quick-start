@@ -1,3 +1,3 @@
 export default {
-  UserInfo: state => state.UserInfo
+  UserInfo: (state) => state.UserInfo,
 };

@@ -1,14 +1,14 @@
 # 快速启动
 
-> 该项目基于vue-cli创建的uniapp项目并使用uview2组件库，以及使用typescript为**主要**开发语言，项目提供部分开箱即用的目录结构和助手函数，让您能最快速度启动项目。
+> 该项目基于 vue-cli 创建的 uniapp 项目并使用 uview2 组件库，以及使用 typescript 为**主要**开发语言，项目提供部分开箱即用的目录结构和助手函数，让您能最快速度启动项目。
 
 # 适用于哪些人
 
-uview2总是因为各种原因安装不成功的，想要尝试使用ts开发的，**以H5为主要目标平台的**
+uview2 总是因为各种原因安装不成功的，想要尝试使用 ts 开发的，**以 H5 为主要目标平台的**
 
 # 使用方式
 
-1. clone源码
+1. clone 源码
 
 ```shell
 git clone https://github.com/orangepro11/uview2-quick-start
@@ -16,19 +16,19 @@ git clone https://github.com/orangepro11/uview2-quick-start
 
 2. 安装依赖
 
-如果你是使用npm的用户
+如果你是使用 npm 的用户
 
 ```shell
 npm install
 ```
 
-如果你是使用yarn的用户
+如果你是使用 yarn 的用户
 
 ```shell
 yarn
 ```
 
-如果你是使用pnpm的用户
+如果你是使用 pnpm 的用户
 
 ```shell
 pnpm install
@@ -40,13 +40,13 @@ pnpm install
 yarn serve
 ```
 
-4. 把.git文件夹删除，然后自己整一个
+4. 把.git 文件夹删除，然后自己整一个
 
-# 关于TypeScript
+# 关于 TypeScript
 
-你可能为你不熟悉ts而担心，但是没有关系，只要不开启严格模式（这已经是默认选项），就完全可以在ts文件里写js代码而不会引起任何报错，并可以使用ts提供的诱人特性。如果你想开启严格模式，需要自行去tsconfig.json里配置"strict":true
+你可能为你不熟悉 ts 而担心，但是没有关系，只要不开启严格模式（这已经是默认选项），就完全可以在 ts 文件里写 js 代码而不会引起任何报错，并可以使用 ts 提供的诱人特性。如果你想开启严格模式，需要自行去 tsconfig.json 里配置"strict":true
 
-当然你也可以完全使用js开发，需要在tsconfig.json中设置"allowJs": true
+当然你也可以完全使用 js 开发，需要在 tsconfig.json 中设置"allowJs": true
 
 ```json
 {
@@ -70,13 +70,13 @@ yarn serve
 }
 ```
 
-# HTTP请求
+# HTTP 请求
 
-在src/http下提供了基于flyio的简单http请求封装。
+在 src/http 下提供了基于 flyio 的简单 http 请求封装。
 
 baseURL.ts
 
-在这个文件里配置项目api的基础路径
+在这个文件里配置项目 api 的基础路径
 
 ```typescript
 const url: string = 'https://example.com/api/';
@@ -152,14 +152,14 @@ export function post(url: string, body: any, query?: any): Promise<any> {
 }
 ```
 
-这里着重解释一下post函数的第三个参数：在大多数情况下，你**不需要**传入这个参数，但是在某些场景下，可能部分参数是get传递部分参数是post传递，那么get参数部分就要放到第三个参数里。
+这里着重解释一下 post 函数的第三个参数：在大多数情况下，你**不需要**传入这个参数，但是在某些场景下，可能部分参数是 get 传递部分参数是 post 传递，那么 get 参数部分就要放到第三个参数里。
 
-## API集中管理
+## API 集中管理
 
-在src/api下集中管理所有api，而**不要直接在页面中写请求地址**，此为方便解耦合的做法。 
+在 src/api 下集中管理所有 api，而**不要直接在页面中写请求地址**，此为方便解耦合的做法。
 
 ```typescript
-import { get, post } from "@/http";
+import { get, post } from '@/http';
 
 export const getUser = () => get('/api/user');
 ```
@@ -174,10 +174,10 @@ export const getUser = () => get('/api/user');
 
 ```typescript
 export interface User {
-    id: number; // 数据库主键
-    name: string; // 姓名/昵称
-    username: string;// 用户名
-    user_icon: string; // 头像
+  id: number; // 数据库主键
+  name: string; // 姓名/昵称
+  username: string; // 用户名
+  user_icon: string; // 头像
 }
 ```
 
@@ -185,8 +185,8 @@ export interface User {
 
 ```typescript
 // 标记返回类型为 User,方便代码提示
-export async function user_get():Promise<User> {
-    return getUser();
+export async function user_get(): Promise<User> {
+  return getUser();
 }
 ```
 
@@ -194,31 +194,17 @@ export async function user_get():Promise<User> {
 
 # 助手函数
 
-在src/helpers下定义项目中用到的所有助手函数，这个目录可定制化的空间非常高，你可以按照你的喜好随意的更改他们。
+在 src/helpers 下定义项目中用到的所有助手函数，这个目录可定制化的空间非常高，你可以按照你的喜好随意的更改他们。
 
 ## 总线
 
 总线主要提供页面间通信的方式。
 
 ```typescript
-// 此为vue总线实例，你可以通过单独引入这个文件也可以在main.js中注册并通过Vue.prototype.$bus访问
-
 import Vue from 'vue';
-declare const uni: any;
-const eventMap: Map<string, object[]> = new Map();
-/**
- * 总线
- */
-const bus = new Vue({
-  /**
-   * 迷你的vuex，全局共享
-   * @returns
-   */
-  data() {
-    return {
 
-    };
-  },
+const eventMap: Map<string, object[]> = new Map();
+const bus = new Vue({
   methods: {
     /**
      * 往总线注册事件
@@ -255,76 +241,154 @@ const bus = new Vue({
         });
         eventMap.delete(event);
       }
-    },
-
+    }
   }
 });
 
-function install(Vue: any) {
-  Vue.prototype.$bus = bus;
+type IEvents = NonNullable<Vue['$options']['events']>;
+
+interface IEventConfig {
+  // 回调，若是字符串从methods中取
+  handler: IEvents[string];
+  // 已经运行的次数
+  runTimes: number;
+  // 最大运行次数
+  maxRunTimes: number;
 }
 
-export { bus };
+type IParent = Record<string, Array<IEventConfig>>;
 
-export default { install };
+const defineEventsMergeStrategies = (parent?: IParent, child?: IEvents) => {
+  const events = Object.assign({}, parent);
+  for (const key in child) {
+    const [name, times] = key.split(':');
+    if (!events[name]) {
+      events[name] = [];
+    }
+    events[name].push({
+      handler: child[key],
+      runTimes: 0,
+      maxRunTimes: times ? (times === 'once' ? 1 : parseInt(times)) : NaN
+    });
+  }
+  return events;
+};
+
+function created(this: InstanceType<typeof Vue>) {
+  const { events, methods } = this.$options;
+
+  /** 若不存在events则不需要进行事件的注册操作 **/
+  if (!events || !Object.keys(events).length) {
+    return;
+  }
+
+  /** 暂存当前组件的events，便于组件销毁时自动解绑 **/
+  this.$eventbus = {};
+
+  for (const key in events) {
+    this.$eventbus[key] = (args: any[]) => {
+      ((events[key] as unknown) as Array<IEventConfig>).forEach(handlerConfig => {
+        const { handler, runTimes, maxRunTimes } = handlerConfig;
+        const originalCb = typeof handler === 'string' ? methods![handler] : handler;
+        let cb = originalCb;
+
+        // 若限制了事件的最大执行次数
+        if (!isNaN(maxRunTimes)) {
+          cb = function(...args) {
+            if (runTimes < maxRunTimes) {
+              handlerConfig.runTimes++;
+              originalCb.call(this, ...args);
+            }
+          };
+        }
+
+        cb.call(this, ...args);
+      });
+    };
+    this.$bus.$on(key, this.$eventbus[key]);
+  }
+}
+
+function beforeDestroy(this: InstanceType<typeof Vue>) {
+  if (this.$eventbus) {
+    // 解绑当前组件注册的事件
+    for (const key in this.$eventbus) {
+      this.$bus.$off(key, this.$eventbus[key]);
+    }
+  }
+}
+
+function $Trigger(this: InstanceType<typeof Vue>, key: string, ...args: any[]) {
+  this.$bus.$emit(key, args);
+}
+
+function install<T extends typeof Vue>(Vue: T) {
+  Vue.config.optionMergeStrategies.events = defineEventsMergeStrategies;
+  Vue.prototype.$bus = bus;
+  /** Why not used '$trigger'? Because the key word of '$trigger' has been occupy in 'v-uni-view' componet. **/
+  Vue.prototype.$Trigger = $Trigger;
+  Vue.mixin({ created, beforeDestroy });
+}
+
+export { install as default, bus };
 ```
 
-该方法既导出了install方法也导出了bus实例，使得你既可以通过import这个文件引用到它也可以通过this.$bus访问到它。当然你也可以挂载到uni实例上。
+该方法既导出了 install 方法也导出了 bus 实例，使得你既可以通过 import 这个文件引用到它也可以通过 this.\$bus 访问到它。当然你也可以挂载到 uni 实例上。
 
-使用方法一：通过this.$bus.on监听事件，通过this,$bus.emit触发事件，通过this,$bus.off退订事件。
+使用方法一：通过 this.$bus.on监听事件，通过this.$bus.emit 触发事件，通过 this.$bus.off退订事件。
 <br/>
-使用方法二：在增加events配置项后，便可通过this.$Trigger触发事件，如下示例。
+使用方法二：在增加events配置项后，便可通过this.$Trigger 触发事件，如下示例。
 
 ```vue
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
 export default Vue.extend({
   data() {
     return {
       name: '我是测试组件'
-    }
+    };
   },
   events: {
     aa() {
-      console.log('我是aa', this.name)
+      console.log('我是aa', this.name);
     },
     'bb:once'(a, b, c) {
-      console.log('我是仅会执行1次的bb', a, b, c)
+      console.log('我是仅会执行1次的bb', a, b, c);
     },
     'cc:2'() {
-      console.log('我是最多会执行2次的cc')
+      console.log('我是最多会执行2次的cc');
     },
     dd: 'fn'
   },
   methods: {
     fn() {
-      console.log('我是dd事件触发的fn')
+      console.log('我是dd事件触发的fn');
     }
   },
   created() {
     // events与$Trigger通常是跨组件层级的，这里为便于展示写在了同一组件内
-    this.$Trigger('aa')
-    this.$Trigger('bb', 1, 2, 3)
-    this.$Trigger('bb', 1, 2, 3)
-    this.$Trigger('cc')
-    this.$Trigger('cc')
-    this.$Trigger('cc')
-    this.$Trigger('cc')
-    this.$Trigger('dd')
+    this.$Trigger('aa');
+    this.$Trigger('bb', 1, 2, 3);
+    this.$Trigger('bb', 1, 2, 3);
+    this.$Trigger('cc');
+    this.$Trigger('cc');
+    this.$Trigger('cc');
+    this.$Trigger('cc');
+    this.$Trigger('dd');
   }
-})
+});
 </script>
 ```
 
 ## 友好提示
 
-在src/helpers/toast下提供了友好提示函数，原理是通过Vue.extends和DOM的api动态创建元素。
+在 src/helpers/toast 下提供了友好提示函数，原理是通过 Vue.extends 和 DOM 的 api 动态创建元素。
 
-使用方式：this.$toast.success成功提示，this.$toast.error错误提示，this.$toast,loading加载动画。
+使用方式：this.$toast.success成功提示，this.$toast.error 错误提示，this.\$toast,loading 加载动画。
 
 # 实用组件
 
-在src/components下封装了若干实用(花里胡哨)组件，组件通过easycom引入，可在任何地方直接引用到。
+在 src/components 下封装了若干实用(花里胡哨)组件，组件通过 easycom 引入，可在任何地方直接引用到。
 
 ## 礼花组件
 
@@ -332,38 +396,38 @@ export default Vue.extend({
 
 ```vue
 <template>
-     <i-firework ref="firework"></i-firework>
+  <i-firework ref="firework"></i-firework>
 </template>
 
 <script>
 export default {
-    mounted() {
-        // 至少要在mounted生命周期之后才能可靠的获取到ref
-        this.$refs.firework.show(); // 主动调用，显示礼花
-    }
-}
+  mounted() {
+    // 至少要在mounted生命周期之后才能可靠的获取到ref
+    this.$refs.firework.show(); // 主动调用，显示礼花
+  }
+};
 </script>
 ```
 
-## loading组件
+## loading 组件
 
-该组件用于展示加载中特效，较uni.showLoading体验较好。
+该组件用于展示加载中特效，较 uni.showLoading 体验较好。
 
 ```vue
 <template>
-     <muni-loading ref="loading"></muni-loading>
+  <muni-loading ref="loading"></muni-loading>
 </template>
 
 <script>
 export default {
-    mounted() {
-        // 至少要在mounted生命周期之后才能可靠的获取到ref
-        this.$refs.loading.show(); // 主动调用，显示loading
-        setTimeount(() => {
-            this.$refs.loading.hide(); // 主动调用，关闭loading
-        }, 3000)
-    }
-}
+  mounted() {
+    // 至少要在mounted生命周期之后才能可靠的获取到ref
+    this.$refs.loading.show(); // 主动调用，显示loading
+    setTimeount(() => {
+      this.$refs.loading.hide(); // 主动调用，关闭loading
+    }, 3000);
+  }
+};
 </script>
 ```
 
@@ -373,11 +437,11 @@ export default {
 
 ```vue
 <template>
-    <muni-poster ref="poster" :width="750" :height="750">
-        <template v-slot="{src}">
-            <image :src="src" style="width: 750rpx;height: 750rpx;"></image>
-        </template>
-    </muni-poster>
+  <muni-poster ref="poster" :width="750" :height="750">
+    <template v-slot="{ src }">
+      <image :src="src" style="width: 750rpx;height: 750rpx;"></image>
+    </template>
+  </muni-poster>
 </template>
 
 <script>
@@ -402,88 +466,88 @@ export default {
 </script>
 ```
 
-# uni.$m对象
+# uni.\$m 对象
 
-这个是对一些常用操作的全局封装，它们有的是uni原生api的二次封装，有的是脱胎于实际场景的方法。
+这个是对一些常用操作的全局封装，它们有的是 uni 原生 api 的二次封装，有的是脱胎于实际场景的方法。
 
-## 类型检测typeOf
+## 类型检测 typeOf
 
-这个是对内置的typeof关键字的增强，用来弥补无法准确判断null，Date等类型的不足，类型为**全小写**。
+这个是对内置的 typeof 关键字的增强，用来弥补无法准确判断 null，Date 等类型的不足，类型为**全小写**。
 
 ### 示例
 
 ```js
-uni.$m.typeOf(new Date()) // date
+uni.$m.typeOf(new Date()); // date
 ```
 
 ### 可能的返回值
 
-| 返回值              | 说明    |
-| ---------------- | ----- |
-| number           | 数字类型  |
+| 返回值           | 说明       |
+| ---------------- | ---------- |
+| number           | 数字类型   |
 | string           | 字符串类型 |
-| object           | 对象    |
-| null             | 空     |
-| undefined        | 尚未定义  |
-| date             | 日期类型  |
-| htmlcollection   | DOM集合 |
-| html[xxx]element | DOM对象 |
-| set              | 集合    |
-| map              | 哈希表   |
-| array            | 数组    |
+| object           | 对象       |
+| null             | 空         |
+| undefined        | 尚未定义   |
+| date             | 日期类型   |
+| htmlcollection   | DOM 集合   |
+| html[xxx]element | DOM 对象   |
+| set              | 集合       |
+| map              | 哈希表     |
+| array            | 数组       |
 
-> typeOf几乎涵盖了所有可能的类型，推荐在所有需要进行类型判断的场景下优先使用它。
+> typeOf 几乎涵盖了所有可能的类型，推荐在所有需要进行类型判断的场景下优先使用它。
 
 ## 面向切面的程序设计
 
-在vm下的$m里封装了一些暴露函数切面的方法，有before，after和chain
+在 vm 下的\$m 里封装了一些暴露函数切面的方法，有 before，after 和 chain
 
-### 前置执行函数before
+### 前置执行函数 before
 
 应用场景：用于在提交表单之前需要校验参数等场景
 
 ```vue
 <template>
-    <button @click="$m.before(onClick, beforeOnClick)(123)">点我</button>
-</template> 
+  <button @click="$m.before(onClick, beforeOnClick)(123)">点我</button>
+</template>
 
 <script>
 export default {
-    methods: {
-        onClick(e) {
-            console.log(e); // 123
-            console.log('你点击了按钮');
-        },
-        beforeOnClick() {
-            console.log('在你点击按钮之前触发');
-            // return false; // 如果return false，则不会往下执行下面的函数
-        },
+  methods: {
+    onClick(e) {
+      console.log(e); // 123
+      console.log('你点击了按钮');
+    },
+    beforeOnClick() {
+      console.log('在你点击按钮之前触发');
+      // return false; // 如果return false，则不会往下执行下面的函数
     }
-}
+  }
+};
 </script>
 ```
 
 ### 后置执行函数
 
-场景：一般不会用到，如果你在执行函数A以后还要做一些收尾工作则可以考虑用。
+场景：一般不会用到，如果你在执行函数 A 以后还要做一些收尾工作则可以考虑用。
 
 ```vue
 <template>
-    <button @click="$m.after(onClick, afterOnClick)(123)">点我</button>
-</template> 
+  <button @click="$m.after(onClick, afterOnClick)(123)">点我</button>
+</template>
 
 <script>
 export default {
-    methods: {
-        onClick(e) {
-            console.log(e); // 123
-            console.log('你点击了按钮');
-        },
-        afterOnClick() {
-            console.log('在你点击按钮之后触发');
-        },
+  methods: {
+    onClick(e) {
+      console.log(e); // 123
+      console.log('你点击了按钮');
+    },
+    afterOnClick() {
+      console.log('在你点击按钮之后触发');
     }
-}
+  }
+};
 </script>
 ```
 
@@ -505,7 +569,7 @@ export default {
 <button @click="$m.after(onClick, afterOnClick)($event)">点我</button> // 会执行，也有参数。完美
 ```
 
-> before和after在某些情况下可以互换，只要你逻辑转的过来。
+> before 和 after 在某些情况下可以互换，只要你逻辑转的过来。
 
 ### 函数链接
 
@@ -513,62 +577,54 @@ export default {
 
 ```vue
 <template>
-    <button @click="$m.chain(beforeOnClick, onClick, afterOnClick)(1)">点我</button>
-</template> 
+  <button @click="$m.chain(beforeOnClick, onClick, afterOnClick)(1)">点我</button>
+</template>
 
 <script>
 export default {
-    methods: {
-        beforeOnClick(e) {
-          console.log(e); // [1]，注意是个数组
-          console.log('在你点击按钮之前触发');
-          return e[0] + 1; // 传给下一个函数的参数
-        },
-        onClick(e) {
-          console.log(e); // 这时候就不是数组了，上一个函数return什么就是什么
-          console.log('你点击了按钮');
-          return e + 1; // 传给下一个函数的参数
-        },
-        afterOnClick(e) {
-          console.log(e); // 上一个函数return什么就是什么
-          console.log('在你点击按钮之后触发');
-        }
+  methods: {
+    beforeOnClick(e) {
+      console.log(e); // [1]，注意是个数组
+      console.log('在你点击按钮之前触发');
+      return e[0] + 1; // 传给下一个函数的参数
+    },
+    onClick(e) {
+      console.log(e); // 这时候就不是数组了，上一个函数return什么就是什么
+      console.log('你点击了按钮');
+      return e + 1; // 传给下一个函数的参数
+    },
+    afterOnClick(e) {
+      console.log(e); // 上一个函数return什么就是什么
+      console.log('在你点击按钮之后触发');
     }
-}
+  }
+};
 </script>
 ```
 
 注意事项：同上。
 
-
-
 # 关于路由
 
-在muni/js/router/index下封装了若干路由相关的方法。
-
-
-
-
-
-
+在 muni/js/router/index 下封装了若干路由相关的方法。
 
 # 全局样式
 
-在src/styles下提供全局样式，包括变量，混入等等。
+在 src/styles 下提供全局样式，包括变量，混入等等。
 
 # 关于依赖
 
 ## flyio
 
-[GitHub地址](https://github.com/wendux/fly)
+[GitHub 地址](https://github.com/wendux/fly)
 
-------
+---
 
 ## momentjs
 
 [官方文档](https://momentjs.com/)
 
--------
+---
 
 ## lodash-es
 
@@ -576,8 +632,8 @@ export default {
 
 ## uuid
 
-[npm仓库](https://www.npmjs.com/package/uuid)
+[npm 仓库](https://www.npmjs.com/package/uuid)
 
-# 关于uview2版本
+# 关于 uview2 版本
 
-该项目基于uview2.0.19非稳定版，后续会持续更新。
+该项目基于 uview2.0.19 非稳定版，后续会持续更新。

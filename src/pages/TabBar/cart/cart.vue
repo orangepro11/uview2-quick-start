@@ -14,7 +14,6 @@ export default Vue.extend({
   },
   methods: {},
   computed: {},
-  mounted() {}
 });
 </script>
 

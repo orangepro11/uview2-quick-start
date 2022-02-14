@@ -1,8 +1,3 @@
-declare module '*.vue' {
-  import Vue from 'vue';
-  export default Vue;
-}
-
 declare module 'uview-ui' {
   import uViewUI from '@/uview-ui';
   export default uViewUI;
@@ -10,6 +5,7 @@ declare module 'uview-ui' {
 
 // 1. 确保在声明补充的类型之前导入 'vue'
 import Vue from 'vue';
+import { bus } from './helpers/bus';
 
 // 2. 定制一个文件，设置你想要补充的类型
 //    在 types/vue.d.ts 里 Vue 有构造函数类型
@@ -17,21 +13,20 @@ declare module 'vue/types/vue' {
   // 3. 声明为 Vue 补充的东西
   interface Vue {
     $u: any;
-    $bus: any;
+    $bus: typeof bus;
     mescrollInit: any;
+    $eventbus: Record<string, (args: any[]) => void>;
     $Trigger: (name: string, ...args: any[]) => void;
     $router: any;
     $m: any;
   }
 }
 
-// declare module 'vue/types/options' {
-//   interface ComponentOptions<V extends Vue> {
-//     events?: Record<string, string | ((this: V, ...args: any[]) => void)>;
-//     $m: any;
-//     $router: any;
-//   }
-// }
+declare module 'vue/types/options' {
+  interface ComponentOptions<V extends Vue> {
+    events?: Record<string, string | ((this: V, ...args: any[]) => void)>;
+  }
+}
 
 declare module '@types/uni-app/lib/uni' {
   interface Uni {
@@ -55,5 +50,5 @@ declare module 'uni-simple-router' {
   export default uniSimpleRouter;
 }
 
-declare var window: any;
+declare let window: any;
 declare const uni: Uni;

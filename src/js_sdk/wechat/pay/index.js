@@ -1,5 +1,5 @@
 /**
- * 此为腾讯微信支付接口，不建议直接挂载到全局对象上，在需要的时候直接引入即可 
+ * 此为腾讯微信支付接口，不建议直接挂载到全局对象上，在需要的时候直接引入即可
  * @author 不爱喝橙子汁
  * @version 1.0.0
  */
@@ -9,9 +9,8 @@
  * @returns Boolean 是否微信浏览器
  */
 function isWechat() {
-	return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+  return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
 }
-
 
 /**
  * 该方法用于在微信浏览器中唤起支付，参数说明如下：
@@ -25,40 +24,39 @@ function isWechat() {
  * @returns {Promise<string>} 支付状态 ok/cancel/fail
  */
 export function pay(config) {
-	if (!isWechat()) {
-		return Promise.reject('请在微信浏览器中打开');
-	}
+  if (!isWechat()) {
+    return Promise.reject('请在微信浏览器中打开');
+  }
 
-	/**
-	 * 闭包函数，用于获取支付状态
-	 * @returns {Promise<string>} 支付状态 ok/cancel/fail
-	 */
-	function onBridgeReady() {
-		return new Promise((resolve, reject) => {
-			WeixinJSBridge.invoke('getBrandWCPayRequest', config, (res) => {
-				if (res.err_msg == "get_brand_wcpay_request:ok") {
-					resolve('ok');
-				} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-					reject('cancel');
-				} else {
-					reject('fail');
-				}
-			});
-		});
-	}
+  /**
+   * 闭包函数，用于获取支付状态
+   * @returns {Promise<string>} 支付状态 ok/cancel/fail
+   */
+  function onBridgeReady() {
+    return new Promise((resolve, reject) => {
+      WeixinJSBridge.invoke('getBrandWCPayRequest', config, (res) => {
+        if (res.err_msg == 'get_brand_wcpay_request:ok') {
+          resolve('ok');
+        } else if (res.err_msg == 'get_brand_wcpay_request:cancel') {
+          reject('cancel');
+        } else {
+          reject('fail');
+        }
+      });
+    });
+  }
 
-
-	if (typeof WeixinJSBridge === 'undefined') {
-		// 如果没有WeixinJSBridge，则说明不是在微信中打开的
-		if (document.addEventListener) {
-			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-		} else if (document.attachEvent) {
-			// 如果是IE浏览器，则直接调用onBridgeReady
-			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-		} else {
-			// 否则，直接调用onBridgeReady
-			return onBridgeReady();
-		}
-	}
+  if (typeof WeixinJSBridge === 'undefined') {
+    // 如果没有WeixinJSBridge，则说明不是在微信中打开的
+    if (document.addEventListener) {
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    } else if (document.attachEvent) {
+      // 如果是IE浏览器，则直接调用onBridgeReady
+      document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+      document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    } else {
+      // 否则，直接调用onBridgeReady
+      return onBridgeReady();
+    }
+  }
 }
