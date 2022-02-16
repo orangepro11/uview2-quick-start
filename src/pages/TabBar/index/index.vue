@@ -1,8 +1,7 @@
 <template>
   <div>
     <i-navbar title="主页" :is-back="false"></i-navbar>
-    这是主页
-    <button>节流触发</button>
+    恭喜你成功运行起来了~
   </div>
 </template>
 

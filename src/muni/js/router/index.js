@@ -1,5 +1,5 @@
 const { addSlanting, getPrevPage, getVMByPagesRouter, getParamsByUrl, addParamsToUrl } = require('./utils');
-import { TabBarPages, LoginPage, Pages } from '@/constantRouters';
+import { TabBarPages, LoginPage, Pages } from './constantRouters';
 import { typeOf } from '../utils';
 
 class CustomRouter {
@@ -120,8 +120,8 @@ class CustomRouter {
 }
 
 const router = new CustomRouter(
-  TabBarPages.map(page => addSlanting(page)),
-  addSlanting(LoginPage)
+  TabBarPages && TabBarPages.map(page => addSlanting(page)),
+  LoginPage && addSlanting(LoginPage)
 ); // 默认导出一个初始化的实例
 
 export default router;
