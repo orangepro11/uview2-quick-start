@@ -12,7 +12,6 @@
 				backgroundColor: bgColor,
 				borderRadius: shape == 'round' ? '100px' : '4px',
 				borderColor: borderColor,
-				height: height + 'rpx'
 			}"
 		>
 			<template v-if="$slots.label || label !== null">
@@ -23,7 +22,7 @@
 			<view class="u-search__content__icon">
 				<u-icon
 					@tap="clickIcon"
-				    :size="22"
+				    :size="searchIconSize"
 				    :name="searchIcon"
 				    :color="searchIconColor ? searchIconColor : color"
 				></u-icon>
@@ -47,6 +46,7 @@
 					textAlign: inputAlign,
 					color: color,
 					backgroundColor: bgColor,
+					height: $u.addUnit(height)
 				}, inputStyle]"
 			/>
 			<view
@@ -91,6 +91,7 @@
 	 * @property {Boolean}			disabled			是否启用输入框（默认 false ）
 	 * @property {String}			borderColor			边框颜色，配置了颜色，才会有边框 (默认 'transparent' )
 	 * @property {String}			searchIconColor		搜索图标的颜色，默认同输入框字体颜色 (默认 '#909399' )
+	 * @property {Number | String}	searchIconSize 搜索图标的字体，默认22
 	 * @property {String}			color				输入框字体颜色（默认 '#606266' ）
 	 * @property {String}			placeholderColor	placeholder的颜色（默认 '#909399' ）
 	 * @property {String}			searchIcon			输入框左边的图标，可以为uView图标名称或图片路径  (默认 'search' )
@@ -241,6 +242,7 @@ $u-search-action-margin-left: 5px !default;
 		border-width: 1px;
 		border-color: transparent;
 		border-style: solid;
+		overflow: hidden;
 
 		&__icon {
 			@include flex;

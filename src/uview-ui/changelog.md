@@ -1,3 +1,90 @@
+## 2.0.28（2022-02-22）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1. search组件新增searchIconSize属性
+2. 兼容Safari/Webkit中传入时间格式如2022-02-17 12:00:56
+3. 修复text value.js 判断日期出format错误问题
+4. priceFormat格式化金额出现精度错误
+5. priceFormat在部分情况下出现精度损失问题
+6. 优化表单rules提示
+7. 修复avatar组件src为空时，展示状态不对
+8. 其他修复
+## 2.0.27（2022-01-28）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1.样式修复
+## 2.0.26（2022-01-28）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1.样式修复
+## 2.0.25（2022-01-27）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1. 修复text组件mode=price时，可能会导致精度错误的问题
+2. 添加$u.setConfig()方法，可设置uView内置的config, props, zIndex, color属性，详见：[修改uView内置配置方案](https://uviewui.com/components/setting.html#%E9%BB%98%E8%AE%A4%E5%8D%95%E4%BD%8D%E9%85%8D%E7%BD%AE)
+3. 优化form组件在errorType=toast时，如果输入错误页面会有抖动的问题
+4. 修复$u.addUnit()对配置默认单位可能无效的问题
+## 2.0.24（2022-01-25）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1. 修复swiper在current指定非0时缩放有误
+2. 修复u-icon添加stop属性的时候报错
+3. 优化遗留的通过正则判断rpx单位的问题
+4. 优化Layout布局 vue使用gutter时，会超出固定区域
+5. 优化search组件高度单位问题（rpx -> px）
+6. 修复u-image slot 加载和错误的图片失去了高度
+7. 修复u-index-list中footer插槽与header插槽存在性判断错误
+8. 修复部分机型下u-popup关闭时会闪烁
+9. 修复u-image在nvue-app下失去宽高
+10. 修复u-popup运行报错
+11. 修复u-tooltip报错
+12. 修复box-sizing在app下的警告
+13. 修复u-navbar在小程序中报运行时错误
+14. 其他修复
+## 2.0.23（2022-01-24）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1. 修复image组件在hx3.3.9的nvue下可能会显示异常的问题
+2. 修复col组件gutter参数带rpx单位处理不正确的问题
+3. 修复text组件单行时无法显示省略号的问题
+4. navbar添加titleStyle参数
+5. 升级到hx3.3.9可消除nvue下控制台样式警告的问题
+## 2.0.22（2022-01-19）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1. $u.page()方法优化，避免在特殊场景可能报错的问题
+2. picker组件添加immediateChange参数
+3. 新增$u.pages()方法
+## 2.0.21（2022-01-19）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1. 优化：form组件在用户设置rules的时候提示用户model必传
+2. 优化遗留的通过正则判断rpx单位的问题
+3. 修复微信小程序环境中tabbar组件开启safeAreaInsetBottom属性后，placeholder高度填充不正确
+4. 修复swiper在current指定非0时缩放有误
+5. 修复u-icon添加stop属性的时候报错
+6. 修复upload组件在accept=all的时候没有作用
+7. 修复在text组件mode为phone时call属性无效的问题
+8. 处理u-form clearValidate方法
+9. 其他修复
+## 2.0.20（2022-01-14）
+# uView2.0重磅发布，利剑出鞘，一统江湖
+
+1. 修复calendar默认会选择一个日期，如果直接点确定的话，无法取到值的问题
+2. 修复Slider缺少disabled props 还有注释
+3. 修复u-notice-bar点击事件无法拿到index索引值的问题
+4. 修复u-collapse-item在vue文件下，app端自定义插槽不生效的问题
+5. 优化头像为空时显示默认头像 
+6. 修复图片地址赋值后判断加载状态为完成问题
+7. 修复日历滚动到默认日期月份区域
+8. search组件暴露点击左边icon事件
+9. 修复u-form clearValidate方法不生效
+10. upload h5端增加返回文件参数（文件的name参数）
+11. 处理upload选择文件后url为blob类型无法预览的问题
+12. u-code-input 修复输入框没有往左移出一半屏幕
+13. 修复Upload上传 disabled为true时，控制台报hoverClass类型错误
+14. 临时处理ios app下grid点击坍塌问题
+15. 其他修复
 ## 2.0.19（2021-12-29）
 # uView2.0重磅发布，利剑出鞘，一统江湖
 
