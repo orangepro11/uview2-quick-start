@@ -3,9 +3,6 @@ import App from './App.vue';
 import uView from '@/uview-ui';
 Vue.use(uView);
 
-import muni from '@/muni/js/';
-Vue.use(muni);
-
 Vue.config.productionTip = false;
 
 import store from './store';
