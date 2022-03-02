@@ -125,7 +125,7 @@
     "ios >= 9"
   ],
   "gitHooks": {
-    "pre-commit": "lint-staged"
+    
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
