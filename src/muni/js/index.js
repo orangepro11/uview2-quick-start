@@ -1,6 +1,5 @@
 import * as storage from './storage';
 import * as utils from './utils';
-import * as file from './file';
 import { WxPay } from './wechat';
 import * as jss from './jss';
 import router from './router';
@@ -23,7 +22,7 @@ const deepMergeObjects = (...objs) => {
   return result;
 };
 
-const muni = deepMergeObjects(storage, file, utils, { router }, { WxPay }, { callPrevMethod: router.callPrevMethod });
+const muni = deepMergeObjects(storage, utils, { router }, { WxPay }, { callPrevMethod: router.callPrevMethod });
 
 // 挂载到uni上
 uni.$m = muni;

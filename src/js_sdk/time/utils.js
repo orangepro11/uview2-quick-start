@@ -15,7 +15,7 @@ export function now() {
  * @returns
  * @example format(new Date(), '{YYYY} MM-DDTHH:mm:ss SSS [Z] A')
  */
-export function format(date, format) {
+export function format(date, format = 'YYYY-MM-DD HH:mm:ss') {
   return dayjs(date).format(format);
 }
 
